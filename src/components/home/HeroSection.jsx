@@ -17,51 +17,57 @@ export default function HeroSection() {
           MOBILE LAYOUT  (visible below md)
           Full-screen photo + text overlay
       ═══════════════════════════════════════════════ */}
-      <div className="relative w-full flex items-end md:hidden"
-           style={{ height: 'calc(100svh - 91px)', minHeight: '520px', maxHeight: '780px' }}>
+      <div 
+  className="relative w-full flex items-end md:hidden overflow-hidden bg-black"
+  style={{ height: 'calc(100svh - 91px)', minHeight: '520px', maxHeight: '780px' }}
+>
+  {/* Background photo - تم تعديل الـ objectPosition لضبط مكان الكاوتش في الشاشة */}
+  <img
+    src="/maintyre.png"
+    alt="Car tyres in smoke background"
+    className="absolute inset-0 w-full h-full object-cover hero-ken-burns"
+    style={{ objectPosition: '75% center' }}
+  />
 
-        {/* Background photo */}
-        <div
-          className="hero-ken-burns absolute inset-0 bg-cover bg-[center_top] overflow-hidden"
-          role="img"
-          aria-label="Car tyres in smoke background"
-          style={{ backgroundImage: 'url("/maintyre.jpg")' }}
-        />
+  {/* Dark gradient overlay */}
+  <div 
+    className="absolute inset-0 z-10 pointer-events-none"
+    style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.2) 100%)' }} 
+  />
 
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0"
-             style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,0.1) 100%)' }} />
+  {/* Text content */}
+  <div className="relative z-20 w-full px-5 pb-9">
+    <h1 
+      className="hero-text-enter hero-text-d2 font-normal leading-[1.06] tracking-[-0.02em] text-white mb-3.5"
+      style={{ fontFamily: "'post no pills combo', sans-serif", fontSize: 'clamp(36px, 10vw, 52px)' }}
+    >
+      Made for<br />every<br />road.
+    </h1>
 
-        {/* Text content */}
-        <div className="relative z-10 w-full px-5 pb-9">
+    <p 
+      className="hero-text-enter hero-text-d3 text-[13px] leading-relaxed text-white/80 mb-5"
+      style={{ maxWidth: '320px' }}
+    >
+      Find tyres for your car, your roads and your everyday journeys.
+    </p>
 
-          <h1 className="hero-text-enter hero-text-d2 font-normal leading-[1.06] tracking-[-0.02em] text-white mb-3.5"
-              style={{ fontFamily: "'post no pills combo', sans-serif", fontSize: 'clamp(40px,11vw,58px)' }}>
-            Made for<br />every<br />road.
-          </h1>
-
-          <p className="hero-text-enter hero-text-d3 text-[13px] leading-relaxed text-white/80 mb-5"
-             style={{ maxWidth: '320px' }}>
-            Find tyres for your car, your roads and your everyday journeys.
-          </p>
-
-          <div className="hero-text-enter hero-text-d4 flex flex-wrap gap-2.5">
-            <Link
-              to="/new-arrivals"
-              className="inline-flex items-center whitespace-nowrap rounded-full px-7 py-2.5 text-[13px] font-medium text-black no-underline transition-opacity hover:opacity-90"
-              style={{ background: '#FFC700' }}
-            >
-              Shop new arrivals
-            </Link>
-            <Link
-              to="/shop"
-              className="inline-flex items-center whitespace-nowrap rounded-full border border-white/70 bg-transparent px-7 py-2.5 text-[13px] font-medium text-white no-underline transition-colors hover:bg-white/10"
-            >
-              Explore the range
-            </Link>
-          </div>
-        </div>
-      </div>
+    <div className="hero-text-enter hero-text-d4 flex flex-col gap-2.5">
+      <Link
+        to="/new-arrivals"
+        className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-7 py-2.5 text-[13px] font-medium text-black no-underline transition-opacity hover:opacity-90 text-center"
+        style={{ background: '#FFC700' }}
+      >
+        Shop new arrivals
+      </Link>
+      <Link
+        to="/shop"
+        className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/70 bg-transparent px-7 py-2.5 text-[13px] font-medium text-white no-underline transition-colors hover:bg-white/10 text-center"
+      >
+        Explore the range
+      </Link>
+    </div>
+  </div>
+</div>
 
       {/* ══════════════════════════════════════════════
           DESKTOP LAYOUT  (visible from md and above)
