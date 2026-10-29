@@ -3,20 +3,18 @@ import { Link } from 'react-router-dom';
 
 const features = [
   {
-    title: 'Honest fabrics',
-    body: 'Natural cotton and linen that feel good on your skin and get softer with every wash.',
+    title: 'Clear specifications',
+    body: 'Compare tyre size, load index and speed rating before you choose.',
   },
   {
-    title: 'Simple shapes',
-    body: 'Clean cuts that fit real bodies, of every size, and work with what you already own.',
+    title: 'The right fit',
+    body: 'Check your vehicle handbook and tyre sidewall for the correct fitment.',
   },
   {
-    title: 'Colours that last',
-    body: 'A palette you can mix and wear for years, never tied to one season.',
+    title: 'Everyday care',
+    body: 'Simple guidance on pressure, tread checks and looking after your tyres.',
   },
 ];
-
-const featClasses = ['story-feat-1', 'story-feat-2', 'story-feat-3'];
 
 export default function OurStorySection() {
   const sectionRef = useRef(null);
@@ -39,155 +37,86 @@ export default function OurStorySection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="story-section">
+    <section ref={sectionRef} className="story-section relative w-full overflow-hidden bg-[#4e5155]">
 
-      {/* ══════════════════════════════════════════
-          MOBILE layout — full-bleed image + text overlay
-      ══════════════════════════════════════════ */}
-      <div className="story-mobile">
-        <div className="story-mobile-hero">
-          {/* Background image */}
+      {/* Main Container */}
+      <div className="relative w-full overflow-hidden flex flex-col justify-between"
+           style={{ minHeight: '440px', maxHeight: '500px' }}>
+
+        {/* Background Tyre Image - إظهار الجزء العلوي (قوس الإطار) فقط خلف النصوص */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
           <img
-            src="/c4f29f3419e87fa67bfb19e59f372cb4aa61c5e6.png"
-            alt="Three people seated on a plaid sofa"
-            className="story-mobile-bg"
-          />
-          {/* Gradient overlay — dark at bottom */}
-          <div className="story-mobile-grad" />
-
-          {/* Text overlay */}
-          <div className="story-mobile-content">
-            <h2 className="story-title-1 story-h2-dark">
-              Clothes are made of threads.
-            </h2>
-            <h2 className="story-title-2 story-h2-red">
-              So are people.
-            </h2>
-            <p className="story-body story-body-text story-hide-mobile">
-              Every garment is threads crossing over and under each other.
-              That is our idea of community too: different people, held together.
-            </p>
-            <Link to="/hero" className="story-link story-read-link story-hide-mobile">
-              Read our story
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2"
-                strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-
-
-      </div>
-
-      {/* ══════════════════════════════════════════
-          DESKTOP layout — image with overlays
-      ══════════════════════════════════════════ */}
-      <div className="story-desktop">
-        <div style={{ position: 'relative', width: '100%', lineHeight: 0 }}>
-          <img
-            src="/c4f29f3419e87fa67bfb19e59f372cb4aa61c5e6.png"
-            alt="Three people seated on a plaid sofa"
+            src="/bgimg.png"
+            alt="Tyre background"
+            className="w-full h-full object-cover"
             style={{
-              width: '100%',
-              display: 'block',
-              minHeight: 'clamp(320px, 38vw, 520px)',
-              objectFit: 'cover',
-              objectPosition: 'center 10%',
+              objectPosition: 'center 12%', // يركز على الجزء العلوي من الكاوتش
+              opacity: 0.6,
             }}
           />
+        </div>
 
-          {/* Text overlay — upper left */}
-          <div style={{
-            position: 'absolute', top: '10%', left: '6%',
-            maxWidth: 'min(55%, 540px)', zIndex: 3, lineHeight: 'normal',
-          }}>
-            <h2
-              className="story-title-1"
-              style={{
-                fontFamily: 'var(--font-story)',
-                fontSize: 'clamp(20px, 3.2vw, 46px)',
-                fontWeight: 400, lineHeight: 1.12, color: '#2b2b2b', margin: 0,
-              }}
-            >
-              Clothes are made of threads.
-            </h2>
-            <h2
-              className="story-title-2"
-              style={{
-                fontFamily: 'var(--font-story)',
-                fontSize: 'clamp(20px, 3.2vw, 46px)',
-                fontWeight: 400, lineHeight: 1.12, color: '#C8502A',
-                margin: '0 0 clamp(10px, 1.4vw, 20px)',
-              }}
-            >
-              So are people.
-            </h2>
-            <p
-              className="story-body"
-              style={{
-                fontSize: 'clamp(13px, 1.3vw, 16px)', lineHeight: 1.7,
-                color: '#333', margin: '0 0 clamp(8px, 1.2vw, 16px)',
-              }}
-            >
-              Every garment is threads crossing over and under each other.
-              That is our idea of community too: different people, held together.
-            </p>
-            <Link
-              to="/hero"
-              className="story-link"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 5,
-                fontSize: 'clamp(10px, 0.95vw, 13px)', fontWeight: 500,
-                color: '#1a1a1a', textDecoration: 'underline', textUnderlineOffset: 3,
-                lineHeight: 'normal',
-              }}
-            >
-              Read our story
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2"
-                strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
+        {/* Smooth Grey Overlay */}
+        <div 
+          className="absolute inset-0 z-[1]" 
+          style={{ 
+            background: 'linear-gradient(180deg, rgba(65,68,73,0.85) 0%, rgba(45,48,52,0.75) 50%, rgba(25,27,30,0.92) 100%), radial-gradient(circle at center, rgba(90,93,98,0.3) 0%, rgba(15,17,20,0.8) 100%)' 
+          }} 
+        />
 
-          {/* Feature row overlay — bottom */}
-          <div style={{
-            position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 3,
-            display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-            padding: 'clamp(14px, 2vw, 28px) clamp(20px, 6%, 80px)',
-            borderTop: '1px solid rgba(180,170,160,0.45)',
-          }}>
-            {features.map((f, i) => (
-              <div
-                key={f.title}
-                className={featClasses[i]}
-                style={{
-                  paddingRight: i < features.length - 1 ? 'clamp(12px, 2vw, 28px)' : 0,
-                  paddingLeft: i > 0 ? 'clamp(12px, 2vw, 28px)' : 0,
-                  borderRight: i < features.length - 1
-                    ? '1px solid rgba(180,170,160,0.45)' : 'none',
-                }}
-              >
-                <h3 style={{
-                  fontFamily: 'var(--font-heading)', fontSize: 'clamp(11px, 1.1vw, 15px)',
-                  fontWeight: 700, color: '#1a1a1a', margin: '0 0 5px',
-                  letterSpacing: '-0.01em', lineHeight: 1.2,
-                }}>
+        {/* ════════════ TOP CONTENT ════════════ */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-8 lg:px-16 pt-12 md:pt-14">
+          <h2
+            className="mb-3 text-white tracking-normal"
+            style={{
+              fontFamily: "'post no pills combo', sans-serif",
+              fontSize: 'clamp(32px, 4.2vw, 56px)',
+              fontWeight: 400,
+              lineHeight: 1.08,
+            }}
+          >
+            Every journey starts with the right tyres
+          </h2>
+
+          <p
+            className="mb-4 text-white/80 max-w-xl"
+            style={{
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              fontSize: 'clamp(13px, 1.1vw, 15px)',
+              lineHeight: 1.5,
+            }}
+          >
+            From city streets to weekends away, find tyres for the way you drive. Compare sizes and choose with care.
+          </p>
+
+          <Link
+            to="/hero"
+            className="inline-flex items-center gap-2 text-[#FFC700] text-[14px] font-medium no-underline hover:opacity-90 transition-opacity"
+          >
+            <span className="underline underline-offset-4 decoration-[#FFC700]">Read our story</span>
+            <span className="no-underline">→</span>
+          </Link>
+        </div>
+
+        {/* ════════════ BOTTOM FEATURES ROW ════════════ */}
+        <div className="relative z-10 w-full pb-10 pt-4">
+          <div className="max-w-7xl mx-auto px-8 lg:px-16 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
+            {features.map((f) => (
+              <div key={f.title} className="flex flex-col gap-1.5">
+                <h3
+                  className="text-white text-[15px] md:text-[16px] font-normal leading-snug"
+                  style={{ fontFamily: 'var(--font-heading), serif' }}
+                >
                   {f.title}
                 </h3>
-                <p style={{
-                  fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(9px, 0.85vw, 12px)',
-                  lineHeight: 1.6, color: '#444', margin: 0,
-                }}>
+                <p className="text-white/65 text-[11px] md:text-[12px] leading-relaxed">
                   {f.body}
                 </p>
               </div>
             ))}
           </div>
         </div>
+
       </div>
 
     </section>

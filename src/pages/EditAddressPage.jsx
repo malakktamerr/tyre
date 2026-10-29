@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const ORANGE = '#C9573A';
+const ORANGE = '#8B7000';
 
 const MOCK_USER = {
   firstName: 'Salma',

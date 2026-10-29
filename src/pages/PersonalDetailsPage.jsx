@@ -16,12 +16,13 @@ const NAV_ITEMS = [
   { label: 'Personal details', path: '/account' },
   { label: 'My orders',        path: '/account/orders' },
   { label: 'Address book',     path: '/account/addresses' },
-  { label: 'Saved pieces',     path: '/account/saved' },
+  { label: 'Saved tyres',      path: '/account/saved' },
   { label: 'Preferences',      path: '/account/preferences' },
 ];
 
-/* ─── Accent color ───────────────────────────────────────────────────── */
-const ORANGE = '#C9573A';
+/* ─── Accent color (تم التحديث ليتطابق مع اللون الذهبي والأصفر) ── */
+const GOLD = '#8B7000';
+const YELLOW = '#FFCC00';
 
 /* ═══════════════════════════════════════════════════════════════════════
    Sub-components
@@ -52,11 +53,11 @@ function FormInput({ id, label, type = 'text', value, onChange, required, autoCo
           fontSize: 14,
           color: '#1a1a1a',
           background: '#fff',
-          border: `1px solid ${error ? '#dc2626' : focused ? ORANGE : '#ddd8d0'}`,
+          border: `1px solid ${error ? '#dc2626' : focused ? GOLD : '#ddd8d0'}`,
           borderRadius: 14,
           padding: '11px 16px',
           outline: 'none',
-          boxShadow: focused ? `0 0 0 2px rgba(201,87,58,0.12)` : 'none',
+          boxShadow: focused ? `0 0 0 2px rgba(139,112,0,0.12)` : 'none',
           transition: 'border-color 0.15s, box-shadow 0.15s',
           width: '100%',
           boxSizing: 'border-box',
@@ -88,10 +89,10 @@ function EmailField({ value, onChange, editing, onEdit, error }) {
         style={{
           display: 'flex',
           alignItems: 'center',
-          border: `1px solid ${error ? '#dc2626' : focused ? ORANGE : '#ddd8d0'}`,
+          border: `1px solid ${error ? '#dc2626' : focused ? GOLD : '#ddd8d0'}`,
           borderRadius: 14,
           background: '#fff',
-          boxShadow: focused ? `0 0 0 2px rgba(201,87,58,0.12)` : 'none',
+          boxShadow: focused ? `0 0 0 2px rgba(139,112,0,0.12)` : 'none',
           transition: 'border-color 0.15s, box-shadow 0.15s',
           overflow: 'hidden',
         }}
@@ -124,7 +125,7 @@ function EmailField({ value, onChange, editing, onEdit, error }) {
             fontFamily: 'system-ui,sans-serif',
             fontSize: 13,
             fontWeight: 600,
-            color: ORANGE,
+            color: GOLD,
             background: 'none',
             border: 'none',
             cursor: 'pointer',
@@ -163,10 +164,10 @@ function SectionHeading({ children }) {
 /* ═══════════════════════════════════════════════════════════════════════
    SidebarNavigation
    ═══════════════════════════════════════════════════════════════════════ */
-function SidebarNavigation({ user, activeItem, onNavClick, onSignOut }) {
+function SidebarNavigation({ user, activeItem, onSignOut }) {
   const navigate = useNavigate();
   return (
-    <aside style={{ width: 155, flexShrink: 0 }}>
+    <aside style={{ width: 180, flexShrink: 0 }}>
       {/* User info */}
       <div style={{ marginBottom: 20 }}>
         <p style={{ fontFamily: 'var(--font-heading)', fontSize: 18, fontWeight: 600, color: '#1a1a1a', margin: '0 0 3px' }}>
@@ -194,10 +195,10 @@ function SidebarNavigation({ user, activeItem, onNavClick, onSignOut }) {
                     fontFamily: 'system-ui,sans-serif',
                     fontSize: 13,
                     fontWeight: isActive ? 600 : 400,
-                    color: isActive ? ORANGE : '#3a3a3a',
+                    color: isActive ? GOLD : '#3a3a3a',
                     background: isActive ? '#FDF5F0' : 'transparent',
                     border: 'none',
-                    borderLeft: isActive ? `3px solid ${ORANGE}` : '3px solid transparent',
+                    borderLeft: isActive ? `3px solid ${GOLD}` : '3px solid transparent',
                     padding: '8px 10px',
                     cursor: 'pointer',
                     borderRadius: '0 6px 6px 0',
@@ -219,21 +220,18 @@ function SidebarNavigation({ user, activeItem, onNavClick, onSignOut }) {
 
       {/* Footer links */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888' }}>Need a hand?</span>
         <button
           type="button"
           onClick={onSignOut}
-          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', fontWeight: 500 }}
+          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: GOLD, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', fontWeight: 500 }}
           onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
           onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
           Sign out
         </button>
         <button type="button" onClick={() => navigate('/help')}
-          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', textDecoration: 'underline', textUnderlineOffset: 2 }}
-          onMouseEnter={e => e.currentTarget.style.color = '#555'} onMouseLeave={e => e.currentTarget.style.color = '#888'}
-        >Need a hand?</button>
-        <button type="button" onClick={() => navigate('/help')}
-          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'underline', textUnderlineOffset: 2 }}
+          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: GOLD, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', textDecoration: 'underline', textUnderlineOffset: 2 }}
           onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >Visit help →</button>
       </div>
@@ -248,9 +246,9 @@ export default function PersonalDetailsPage() {
   const navigate = useNavigate();
 
   /* ── Form state ── */
-  const [form, setForm]         = useState({ ...INITIAL_USER });
-  const [saved, setSaved]       = useState({ ...INITIAL_USER });
-  const [errors, setErrors]     = useState({});
+  const [form, setForm]                 = useState({ ...INITIAL_USER });
+  const [saved, setSaved]               = useState({ ...INITIAL_USER });
+  const [errors, setErrors]             = useState({});
   const [emailEditing, setEmailEditing] = useState(false);
   const [saveStatus, setSaveStatus]     = useState('idle'); // idle | saving | success | error
 
@@ -302,16 +300,16 @@ export default function PersonalDetailsPage() {
   const isSaving = saveStatus === 'saving';
 
   return (
-    <div style={{ background: '#fff', minHeight: '100vh' }}>
+    <div style={{ background: '#fff', minHeight: '100vh', width: '100%', boxSizing: 'border-box', paddingBottom: 60 }}>
       <div
         style={{
-          maxWidth: 1400,
-          margin: '0',
-          padding: 'clamp(20px,3vw,36px) clamp(40px,6%,88px)',
+          maxWidth: 1300,
+          margin: '0 auto',
+          padding: '32px clamp(20px,4%,60px)',
         }}
       >
         {/* ── Breadcrumb ── */}
-        <nav aria-label="Breadcrumb" style={{ marginBottom: 12 }}>
+        <nav aria-label="Breadcrumb" style={{ marginBottom: 16 }}>
           <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
             {[
               { label: 'Home', path: '/' },
@@ -332,7 +330,7 @@ export default function PersonalDetailsPage() {
                     <span aria-hidden="true" style={{ color: '#ccc', fontSize: 12 }}>/</span>
                   </>
                 ) : (
-                  <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#3a3a3a' }} aria-current="page">
+                  <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#1a1a1a' }} aria-current="page">
                     {crumb.label}
                   </span>
                 )}
@@ -343,16 +341,13 @@ export default function PersonalDetailsPage() {
 
         {/* ── Page heading ── */}
         <div style={{ marginBottom: 6 }}>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(32px,4vw,48px)', fontWeight: 400, color: '#1a1a1a', margin: '0 0 8px', lineHeight: 1.1 }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(32px,4vw,42px)', fontWeight: 400, color: '#1a1a1a', margin: '0 0 6px', lineHeight: 1.1 }}>
             Personal details
           </h1>
-          <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#888', margin: 0 }}>
+          <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#555', margin: 0 }}>
             A few familiar details, so everything feels like you.
           </p>
         </div>
-
-        {/* ── Divider ── */}
-        <div style={{ height: 1, background: '#ece8e2', margin: '16px 0 28px' }} aria-hidden="true" />
 
         {/* ── Two-column layout ── */}
         <div
@@ -360,6 +355,7 @@ export default function PersonalDetailsPage() {
             display: 'flex',
             gap: 'clamp(32px,5vw,64px)',
             alignItems: 'flex-start',
+            marginTop: 40,
           }}
           className="account-layout"
         >
@@ -367,12 +363,11 @@ export default function PersonalDetailsPage() {
           <SidebarNavigation
             user={saved}
             activeItem="Personal details"
-            onNavClick={() => {}}
             onSignOut={handleSignOut}
           />
 
           {/* ── RIGHT: Form ── */}
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ flex: 1, minWidth: 0, maxWidth: 640 }}>
             <form onSubmit={handleSave} noValidate>
 
               {/* About you */}
@@ -446,8 +441,8 @@ export default function PersonalDetailsPage() {
                   type="submit"
                   disabled={isSaving}
                   style={{
-                    background: isSaving ? '#d4856e' : ORANGE,
-                    color: '#fff',
+                    background: isSaving ? '#e6c200' : YELLOW,
+                    color: '#1a1a1a',
                     fontFamily: 'system-ui,sans-serif',
                     fontSize: 14,
                     fontWeight: 600,
@@ -459,9 +454,10 @@ export default function PersonalDetailsPage() {
                     alignItems: 'center',
                     gap: 8,
                     transition: 'background 0.15s',
+                    boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
                   }}
-                  onMouseEnter={e => { if (!isSaving) e.currentTarget.style.background = '#b84d32'; }}
-                  onMouseLeave={e => { if (!isSaving) e.currentTarget.style.background = ORANGE; }}
+                  onMouseEnter={e => { if (!isSaving) e.currentTarget.style.background = '#e6b800'; }}
+                  onMouseLeave={e => { if (!isSaving) e.currentTarget.style.background = YELLOW; }}
                 >
                   {isSaving ? 'Saving…' : 'Save details'}
                 </button>
@@ -475,7 +471,7 @@ export default function PersonalDetailsPage() {
                     border: 'none',
                     fontFamily: 'system-ui,sans-serif',
                     fontSize: 14,
-                    color: ORANGE,
+                    color: GOLD,
                     cursor: 'pointer',
                     padding: 0,
                     fontWeight: 500,
@@ -494,28 +490,12 @@ export default function PersonalDetailsPage() {
 
       {/* ── Responsive tweaks ── */}
       <style>{`
-        @media (max-width: 640px) {
+        @media (max-width: 900px) {
           .account-layout {
             flex-direction: column !important;
           }
           .account-layout aside {
             width: 100% !important;
-          }
-          /* Horizontal scroll sidebar nav on mobile */
-          .account-layout nav ul {
-            display: flex !important;
-            flex-direction: row !important;
-            overflow-x: auto;
-            gap: 4px;
-            padding-bottom: 4px;
-            scrollbar-width: none;
-          }
-          .account-layout nav ul::-webkit-scrollbar { display: none; }
-          .account-layout nav ul li button {
-            white-space: nowrap;
-            border-left: none !important;
-            border-bottom: 3px solid transparent;
-            border-radius: 4px !important;
           }
         }
         @media (max-width: 480px) {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-const ORANGE = '#C9573A';
+const ORANGE = '#8B7000';
 
 const MOCK_USER = {
   firstName: 'Salma',
@@ -14,22 +14,22 @@ const MOCK_ORDERS = [
     date: '08 October 2026',
     status: 'Delivered',
     items: [
-      { name: 'Relaxed linen shirt × 2', detail: 'Oat · Size M · Qty 1 each' },
+      { name: 'City Touring - 205/55 R16', detail: 'EGP 1,250' },
+      { name: 'City Compact - 175/65 R14', detail: 'EGP 720' },
     ],
-    itemsCount: 2,
+    itemsCount: '2 tyres',
     total: 'EGP 2,030',
-    priceNote: 'EGP 1,250 each',
   },
   {
     id: 'NESEJ-DEMO-1650',
     date: '02 September 2026',
     status: 'Cancelled',
     items: [
-      { name: 'Woven midi dress', detail: 'Clay · M' },
+      { name: 'Road Comfort - 215/60 R16 - 95H', detail: '' },
     ],
-    itemsCount: 1,
+    itemsCount: '1 tyre',
     total: 'EGP 1,710',
-    priceNote: 'Merchandise EGP 1,850\nIllustrative delivery EGP 60',
+    priceNote: 'Merchandise EGP 1,650\nIllustrative delivery EGP 60',
     totalStrike: true,
   },
 ];
@@ -38,7 +38,7 @@ const NAV_ITEMS = [
   { label: 'Personal details', path: '/account' },
   { label: 'My orders',        path: '/account/orders' },
   { label: 'Address book',     path: '/account/addresses' },
-  { label: 'Saved pieces',     path: '/account/saved' },
+  { label: 'Saved tyres',      path: '/account/saved' },
   { label: 'Preferences',      path: '/account/preferences' },
 ];
 
@@ -46,14 +46,17 @@ const STATUS_FILTERS = ['All orders (2)', 'Delivered (1)', 'Cancelled (1)'];
 
 /* ── Status badge ── */
 function StatusBadge({ status }) {
-  const colors = {
-    Delivered: { color: '#166534', bg: '#f0fdf4' },
-    Cancelled: { color: '#991b1b', bg: '#fef2f2' },
-    Processing:{ color: '#92400e', bg: '#fffbeb' },
-  };
-  const s = colors[status] || { color: '#555', bg: '#f5f5f5' };
+  const isDelivered = status === 'Delivered';
   return (
-    <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, fontWeight: 500, color: s.color, background: s.bg, borderRadius: 999, padding: '3px 10px', whiteSpace: 'nowrap' }}>
+    <span style={{ 
+      fontFamily: 'system-ui,sans-serif', 
+      fontSize: 13, 
+      fontWeight: 500, 
+      color: isDelivered ? '#8B7000' : '#666', 
+      background: 'transparent', 
+      padding: 0,
+      whiteSpace: 'nowrap' 
+    }}>
       {status}
     </span>
   );
@@ -63,7 +66,7 @@ function StatusBadge({ status }) {
 function Sidebar({ activeItem, onSignOut }) {
   const navigate = useNavigate();
   return (
-    <aside style={{ width: 155, flexShrink: 0 }}>
+    <aside className="account-sidebar" style={{ width: 180, flexShrink: 0 }}>
       <div style={{ marginBottom: 20 }}>
         <p style={{ fontFamily: 'var(--font-heading)', fontSize: 18, fontWeight: 600, color: '#1a1a1a', margin: '0 0 3px' }}>
           {MOCK_USER.firstName} {MOCK_USER.lastName}
@@ -104,10 +107,7 @@ function Sidebar({ activeItem, onSignOut }) {
       </nav>
       <div style={{ height: 1, background: '#ece8e2', margin: '16px 0' }} />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <button type="button" onClick={() => navigate('/help')}
-          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', textDecoration: 'underline', textUnderlineOffset: 2 }}
-          onMouseEnter={e => e.currentTarget.style.color = '#555'} onMouseLeave={e => e.currentTarget.style.color = '#888'}
-        >Need a hand?</button>
+        <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888' }}>Need a hand?</span>
         <button
           type="button" onClick={onSignOut}
           style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', fontWeight: 500 }}
@@ -134,11 +134,20 @@ export default function MyOrdersPage() {
   });
 
   return (
-    <div style={{ background: '#fff', minHeight: '100vh' }}>
-      <div style={{ maxWidth: 1400, margin: 0, padding: 'clamp(20px,3vw,36px) clamp(40px,6%,88px)' }}>
+    <div style={{ background: '#fff', minHeight: '100vh', width: '100%', boxSizing: 'border-box', paddingBottom: 60 }}>
+      
+      <style>{`
+        @media (max-width: 900px) {
+          .account-content-layout { flex-direction: column !important; gap: 32px !important; }
+          .account-sidebar { width: 100% !important; }
+          .orders-table-container { overflow-x: auto !important; }
+        }
+      `}</style>
+
+      <div style={{ maxWidth: 1300, margin: '0 auto', padding: '32px clamp(20px,4%,60px)' }}>
 
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" style={{ marginBottom: 12 }}>
+        <nav aria-label="Breadcrumb" style={{ marginBottom: 16 }}>
           <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
             {[{ label: 'Home', path: '/' }, { label: 'My account', path: '/account' }, { label: 'My orders', path: '/account/orders' }].map((c, i, arr) => (
               <li key={c.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -147,7 +156,7 @@ export default function MyOrdersPage() {
                     onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'} onMouseLeave={e => e.currentTarget.style.color = '#888'}
                   >{c.label}</Link><span style={{ color: '#ccc', fontSize: 12 }}>/</span></>
                 ) : (
-                  <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#3a3a3a' }} aria-current="page">{c.label}</span>
+                  <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#1a1a1a' }} aria-current="page">{c.label}</span>
                 )}
               </li>
             ))}
@@ -155,140 +164,141 @@ export default function MyOrdersPage() {
         </nav>
 
         {/* Page heading */}
-        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(32px,4vw,48px)', fontWeight: 400, color: '#1a1a1a', margin: '0 0 6px', lineHeight: 1.1 }}>
+        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(32px, 4vw, 42px)', fontWeight: 400, color: '#1a1a1a', margin: '0 0 8px', lineHeight: 1.1 }}>
           My orders
         </h1>
-        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#888', margin: 0 }}>
-          The pieces you chose, and the journeys they take.
+        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#555', margin: 0 }}>
+          The tyres you chose, and their delivery journeys.
         </p>
 
-        {/* Divider */}
-        <div style={{ height: 1, background: '#ece8e2', margin: '16px 0 28px' }} />
-
-        {/* Two-column layout */}
-        <div style={{ display: 'flex', gap: 'clamp(32px,5vw,64px)', alignItems: 'flex-start' }}>
+        {/* Main Layout (Sidebar + Content) */}
+        <div className="account-content-layout" style={{ display: 'flex', gap: 'clamp(32px, 5vw, 64px)', alignItems: 'flex-start', marginTop: 40 }}>
 
           {/* Sidebar */}
           <Sidebar activeItem="My orders" onSignOut={() => navigate('/')} />
 
-          {/* Right: orders */}
+          {/* Right: Filters & Orders Table */}
           <div style={{ flex: 1, minWidth: 0 }}>
 
             {/* Filter tabs */}
-            <div style={{ display: 'flex', gap: 24, marginBottom: 24, borderBottom: '1px solid #ece8e2', paddingBottom: 0 }}>
-              {STATUS_FILTERS.map(f => (
-                <button
-                  key={f}
-                  onClick={() => setActiveFilter(f)}
-                  style={{
-                    fontFamily: 'system-ui,sans-serif', fontSize: 13,
-                    fontWeight: activeFilter === f ? 600 : 400,
-                    color: activeFilter === f ? '#1a1a1a' : '#888',
-                    background: 'none', border: 'none', cursor: 'pointer',
-                    padding: '0 0 12px',
-                    borderBottom: activeFilter === f ? `2px solid #1a1a1a` : '2px solid transparent',
-                    transition: 'color 0.15s',
-                  }}
-                  onMouseEnter={e => { if (activeFilter !== f) e.currentTarget.style.color = '#3a3a3a'; }}
-                  onMouseLeave={e => { if (activeFilter !== f) e.currentTarget.style.color = '#888'; }}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-
-            {/* Table wrapper with background */}
-            <div style={{ background: '#FCFBF8', borderRadius: 10, overflow: 'hidden', border: '1px solid #f0ece6' }}>
-
-              {/* Table header */}
-              <div style={{ display: 'grid', gridTemplateColumns: '160px 120px 100px 1fr 110px 140px', gap: 12, padding: '12px 16px', borderBottom: '1px solid #f0ece6' }}>
-                {['Order #', 'Date', 'Status', 'Items', 'Total', 'Actions'].map(h => (
-                  <span key={h} style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, fontWeight: 500, color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                    {h}
-                  </span>
-                ))}
-              </div>
-
-              {/* Order rows */}
-              {filteredOrders.length === 0 ? (
-                <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#888', padding: '24px 16px' }}>No orders found.</p>
-              ) : (
-                filteredOrders.map((order, i) => (
-                  <div
-                    key={order.id}
+            <div style={{ display: 'flex', gap: 28, marginBottom: 24, alignItems: 'center' }}>
+              {STATUS_FILTERS.map(f => {
+                const isActive = activeFilter === f;
+                return (
+                  <button
+                    key={f}
+                    onClick={() => setActiveFilter(f)}
                     style={{
-                      display: 'grid',
-                      gridTemplateColumns: '160px 120px 100px 1fr 110px 140px',
-                      gap: 12,
-                      padding: '18px 16px',
-                      borderBottom: i < filteredOrders.length - 1 ? '1px solid #f0ece6' : 'none',
-                      alignItems: 'flex-start',
+                      fontFamily: 'system-ui,sans-serif', fontSize: 14,
+                      fontWeight: isActive ? 600 : 400,
+                      color: isActive ? '#1a1a1a' : '#666',
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      padding: 0, whiteSpace: 'nowrap',
+                      transition: 'color 0.15s',
                     }}
+                    onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = '#1a1a1a'; }}
+                    onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = '#666'; }}
                   >
-                    {/* Order # */}
-                    <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>
-                      {order.id}
-                    </span>
-
-                    {/* Date */}
-                    <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#555' }}>
-                      {order.date}
-                    </span>
-
-                    {/* Status */}
-                    <div><StatusBadge status={order.status} /></div>
-
-                    {/* Items */}
-                    <div>
-                      <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#555', margin: '0 0 2px' }}>
-                        {order.itemsCount} {order.itemsCount === 1 ? 'piece' : 'pieces'}
-                      </p>
-                      {order.items.map((it, j) => (
-                        <div key={j}>
-                          <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#3a3a3a', margin: 0 }}>{it.name}</p>
-                          <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 11, color: '#aaa', margin: 0 }}>{it.detail}</p>
-                        </div>
-                      ))}
-                      {order.priceNote && (
-                        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 11, color: '#aaa', margin: '2px 0 0', whiteSpace: 'pre-line' }}>
-                          {order.priceNote}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Total */}
-                    <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 700, color: order.totalStrike ? '#aaa' : '#1a1a1a', textDecoration: order.totalStrike ? 'line-through' : 'none' }}>
-                      {order.total}
-                    </span>
-
-                    {/* Actions */}
-                    <div>
-                      <button
-                        type="button"
-                        onClick={() => navigate(`/account/orders/${order.id}`)}
-                        style={{
-                          fontFamily: 'system-ui,sans-serif', fontSize: 12, fontWeight: 500,
-                          color: '#1a1a1a', background: '#fff',
-                          border: '1px solid #ddd8d0', borderRadius: 999,
-                          padding: '6px 14px', cursor: 'pointer', whiteSpace: 'nowrap',
-                          transition: 'border-color 0.15s',
-                        }}
-                        onMouseEnter={e => e.currentTarget.style.borderColor = '#aaa'}
-                        onMouseLeave={e => e.currentTarget.style.borderColor = '#ddd8d0'}
-                      >
-                        View order details
-                      </button>
-                    </div>
-                  </div>
-                ))
-              )}
+                    {f}
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Help link */}
-            <div style={{ marginTop: 32 }}>
+            {/* Table wrapper container */}
+            <div className="orders-table-container" style={{ background: '#F9F8F6', borderRadius: 16, padding: '8px 0', border: '1px solid #f0ece6' }}>
+              
+              <div style={{ width: '100%', minWidth: '700px' }}>
+                
+                {/* Table Header */}
+                <div style={{ display: 'grid', gridTemplateColumns: '160px 130px 100px 1fr 110px 130px', gap: 16, padding: '16px 24px', alignItems: 'center' }}>
+                  {['Order #', 'Date', 'Status', 'Items', 'Total', 'Actions'].map(h => (
+                    <span key={h} style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, fontWeight: 500, color: '#333', letterSpacing: '-0.01em' }}>
+                      {h}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Order rows */}
+                {filteredOrders.length === 0 ? (
+                  <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#666', padding: '24px 24px' }}>No orders found.</p>
+                ) : (
+                  filteredOrders.map((order) => (
+                    <div
+                      key={order.id}
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: '160px 130px 100px 1fr 110px 130px',
+                        gap: 16,
+                        padding: '20px 24px',
+                        alignItems: 'flex-start',
+                      }}
+                    >
+                      {/* Order # */}
+                      <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 500, color: '#1a1a1a', paddingTop: 2 }}>
+                        {order.id}
+                      </span>
+
+                      {/* Date */}
+                      <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#444', paddingTop: 2 }}>
+                        {order.date}
+                      </span>
+
+                      {/* Status */}
+                      <div><StatusBadge status={order.status} /></div>
+
+                      {/* Items */}
+                      <div>
+                        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#1a1a1a', margin: '0 0 4px', fontWeight: 400 }}>
+                          {order.itemsCount}
+                        </p>
+                        {order.items.map((it, j) => (
+                          <div key={j} style={{ marginBottom: 2 }}>
+                            <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#444', margin: 0 }}>{it.name}</p>
+                            {it.detail && <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 11, color: '#777', margin: 0 }}>{it.detail}</p>}
+                          </div>
+                        ))}
+                        {order.priceNote && (
+                          <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 11, color: '#555', margin: '6px 0 0', whiteSpace: 'pre-line', lineHeight: 1.4 }}>
+                            {order.priceNote}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Total */}
+                      <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 600, color: '#1a1a1a', textDecoration: order.totalStrike ? 'line-through' : 'none', paddingTop: 2 }}>
+                        {order.total}
+                      </span>
+
+                      {/* Actions */}
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() => navigate(`/account/orders/${order.id}`)}
+                          style={{
+                            fontFamily: 'system-ui,sans-serif', fontSize: 12, fontWeight: 400,
+                            color: '#1a1a1a', background: '#fff',
+                            border: '1px solid #dcd6cd', borderRadius: 999,
+                            padding: '6px 16px', cursor: 'pointer', whiteSpace: 'nowrap',
+                            transition: 'border-color 0.15s',
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.borderColor = '#1a1a1a'}
+                          onMouseLeave={e => e.currentTarget.style.borderColor = '#dcd6cd'}
+                        >
+                          View order details
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+
+            {/* Help link below table */}
+            <div style={{ marginTop: 24 }}>
               <button
                 type="button"
-                style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'underline', textUnderlineOffset: 2 }}
+                style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#1a1a1a', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'underline', textUnderlineOffset: 2 }}
                 onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
                 onMouseLeave={e => e.currentTarget.style.opacity = '1'}
               >
@@ -299,17 +309,6 @@ export default function MyOrdersPage() {
           </div>
         </div>
       </div>
-
-      {/* Responsive */}
-      <style>{`
-        @media (max-width: 768px) {
-          .orders-grid { grid-template-columns: 1fr 1fr !important; }
-        }
-        @media (max-width: 640px) {
-          .account-layout { flex-direction: column !important; }
-          .account-layout aside { width: 100% !important; }
-        }
-      `}</style>
     </div>
   );
 }

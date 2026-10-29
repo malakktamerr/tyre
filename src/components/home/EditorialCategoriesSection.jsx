@@ -2,27 +2,27 @@ import { Link } from 'react-router-dom';
 
 const categories = [
   {
-    eyebrow: 'THE SOFT STRUCTURE EDIT',
-    heading: 'For her, for every day.',
-    linkLabel: 'Shop women',
+    eyebrow: 'THE PASSENGER RANGE',
+    heading: 'For the everyday drive.',
+    linkLabel: 'Shop passenger',
     path: '/categories',
-    img: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=780&fit=crop&crop=top',
+    img: '/car1.jpg', // تأكدي أن الصور موجودة في مجلد public
     bg: '#F8F4EF',
   },
   {
     eyebrow: 'QUIETLY CONSIDERED',
-    heading: 'Ease, in every layer.',
-    linkLabel: 'Shop men',
+    heading: 'Ease, in every drive.',
+    linkLabel: 'Shop SUV',
     path: '/categories',
-    img: 'https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=600&h=780&fit=crop&crop=top',
+    img: '/car2.jpg',
     bg: '#F8F4EF',
   },
   {
     eyebrow: 'MADE TO MOVE',
-    heading: 'Small clothes. Big days.',
-    linkLabel: 'Shop kids',
+    heading: 'For work. For the road.',
+    linkLabel: 'Shop van',
     path: '/categories',
-    img: 'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=600&h=780&fit=crop&crop=top',
+    img: '/car3.jpg',
     bg: '#F8F4EF',
   },
 ];
@@ -30,83 +30,45 @@ const categories = [
 export default function EditorialCategoriesSection() {
   return (
     <section
-      className="w-full bg-[#F8F4EF]"
-      style={{ padding: 'clamp(30px,4vw,70px) clamp(16px,4%,80px)' }}
+      className="w-full bg-white py-12 px-6 lg:px-16"
     >
-      <div
-        className="grid grid-cols-1 sm:grid-cols-3 justify-items-center"
-        style={{ gap: '16px' }}
-      >
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 justify-items-center">
         {categories.map((cat) => (
-          <div key={cat.eyebrow} className="flex flex-col w-full" style={{ maxWidth: '463px', gap: '16px' }}>
+          <div key={cat.eyebrow} className="flex flex-col w-full max-w-[420px] gap-4">
 
-            {/* Portrait image — 463×608 ratio */}
+            {/* صندوق الصورة مع الحواف الدائرية المطابقة للصورة */}
             <div
-              className="w-full overflow-hidden"
+              className="w-full overflow-hidden shadow-sm"
               style={{
-                aspectRatio: '463 / 608',
-                borderRadius: '6px',
+                aspectRatio: '463 / 420',
+                borderRadius: '16px',
                 background: cat.bg,
               }}
             >
               <img
                 src={cat.img}
                 alt={cat.heading}
-                className="w-full h-full object-cover object-top"
-                style={{ transition: 'transform 0.5s ease', display: 'block' }}
-                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.02)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 loading="lazy"
               />
             </div>
 
-            {/* Text */}
-            <div className="flex flex-col" style={{ gap: '5px' }}>
-              <p style={{
-                fontFamily: 'system-ui, sans-serif',
-                fontSize: '9px',
-                fontWeight: 500,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: '#999',
-                lineHeight: 1,
-                margin: 0,
-              }}>
+            {/* النصوص */}
+            <div className="flex flex-col gap-1.5 text-left">
+              <p className="text-[10px] font-medium tracking-widest uppercase text-gray-400">
                 {cat.eyebrow}
               </p>
 
-              <h3 style={{
-                fontFamily: 'var(--font-story)',
-                fontSize: 'clamp(16px, 1.6vw, 22px)',
-                fontWeight: 400,
-                lineHeight: 1.15,
-                color: '#1a1a1a',
-                margin: 0,
-              }}>
+              <h3 className="text-[#141619] text-[20px] lg:text-[22px] font-normal font-serif leading-snug">
                 {cat.heading}
               </h3>
 
               <Link
                 to={cat.path}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  fontFamily: 'system-ui, sans-serif',
-                  fontSize: '12px',
-                  fontWeight: 500,
-                  color: '#1a1a1a',
-                  textDecoration: 'underline',
-                  textUnderlineOffset: '2px',
-                  width: 'fit-content',
-                }}
+                className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#141619] underline underline-offset-4 hover:opacity-70 mt-1"
+                style={{ textDecoration: 'underline' }}
               >
-                {cat.linkLabel}
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2"
-                  strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+                {cat.linkLabel} →
               </Link>
             </div>
 

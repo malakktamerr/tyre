@@ -3,9 +3,24 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
 const testimonials = [
-  { id: 1, text: '"The shirt feels considered without feeling precious. I wear it to work and on weekends."', name: 'MARIAM, 34 · SIZE M', rating: 5 },
-  { id: 2, text: '"The shirt feels considered without feeling precious. I wear it to work and on weekends."', name: 'MARIAM, 34 · SIZE M', rating: 5 },
-  { id: 3, text: '"The shirt feels considered without feeling precious. I wear it to work and on weekends."', name: 'MARIAM, 34 · SIZE M', rating: 5 },
+  { 
+    id: 1, 
+    text: '"I found the tyre size I needed and could compare the details in one place."', 
+    name: 'EXAMPLE FEEDBACK', 
+    rating: 5 
+  },
+  { 
+    id: 2, 
+    text: '"I found the tyre size I needed and could compare the details in one place."', 
+    name: 'EXAMPLE FEEDBACK', 
+    rating: 5 
+  },
+  { 
+    id: 3, 
+    text: '"I found the tyre size I needed and could compare the details in one place."', 
+    name: 'EXAMPLE FEEDBACK', 
+    rating: 5 
+  },
 ];
 
 function Stars({ count = 5 }) {
@@ -20,16 +35,17 @@ function Stars({ count = 5 }) {
   );
 }
 
+// تم جعل البوردر أوضح وأكثر بروزاً بزيادة السمك وتغميق اللون قليلاً
 const dashedBorderStyle = {
-  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='none' stroke='%23c8c4be' stroke-width='1.29' stroke-dasharray='12%2C12' stroke-dashoffset='0'/%3E%3C/svg%3E")`,
+  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='none' stroke='%23888580' stroke-width='1.8' stroke-dasharray='10%2C10' stroke-dashoffset='0'/%3E%3C/svg%3E")`,
 };
 
 function TestimonialCard({ t }) {
   return (
     <div style={{ ...dashedBorderStyle, padding: 'clamp(20px,3.8vw,51px) clamp(18px,3.8vw,51px) clamp(18px,3vw,40px)', display: 'flex', flexDirection: 'column' }}>
       <Stars count={t.rating} />
-      <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 'clamp(13px,1.1vw,18px)', fontWeight: 400, lineHeight: 1.4, color: '#1a1a1a', margin: '0 0 20px', flex: 1 }}>{t.text}</p>
-      <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: '10px', fontWeight: 500, letterSpacing: '0.06em', color: '#999', margin: 0 }}>{t.name}</p>
+      <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 'clamp(15px,1.2vw,20px)', fontWeight: 400, lineHeight: 1.4, color: '#1a1a1a', margin: '0 0 24px', flex: 1 }}>{t.text}</p>
+      <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', color: '#777', margin: 0 }}>{t.name}</p>
     </div>
   );
 }
@@ -73,9 +89,6 @@ export default function RealLifeTestimonials() {
             ))}
           </div>
         </div>
-
-
-
       </div>
 
       {/* ══ DESKTOP — 3-column grid ══ */}

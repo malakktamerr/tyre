@@ -13,14 +13,14 @@ const announcements = [
   'Cash on delivery available',
 ];
 
-/* ─── Nav links ──────────────────────────────────────────────────────────── */
+/* ─── Nav links (تمت إضافة مسارات مخصصة لكل كاتيجوري) ─────────────────────── */
 const navLinks = [
-  { label: 'Passenger', path: '/shop', hasMega: true  },
-  { label: 'SUV',       path: '/shop', hasMega: true  },
-  { label: 'Van',       path: '/shop', hasMega: true  },
-  { label: 'Shop all',  path: '/shop', hasMega: true  },
-  { label: 'Our story', path: '/our-story', hasMega: false },
-  { label: 'Contact',   path: '/help',      hasMega: false },
+  { label: 'Passenger', path: '/shop?category=passenger', hasMega: true },
+  { label: 'SUV',       path: '/shop?category=suv',       hasMega: true },
+  { label: 'Van',       path: '/shop?category=van',       hasMega: true },
+  { label: 'Shop all',  path: '/shop',                    hasMega: true },
+  { label: 'Our story', path: '/our-story',               hasMega: false },
+  { label: 'Contact',   path: '/help',                    hasMega: false },
 ];
 
 /* ─── Dot separator ──────────────────────────────────────────────────────── */
@@ -49,7 +49,7 @@ function AnnouncementStrip() {
    Navbar
 ═══════════════════════════════════════════════════════════════════════════ */
 export default function Navbar() {
-  const [menuOpen,   setMenuOpen]   = useState(false);
+  const [menuOpen,    setMenuOpen]   = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [signInOpen, setSignInOpen] = useState(false);
 
@@ -149,9 +149,7 @@ export default function Navbar() {
           {/* Left: desktop nav links */}
           <div className="hidden md:flex items-center flex-1 gap-4 lg:gap-7">
             {navLinks.map((link) => {
-              // Only mark active for unique paths (our-story, help)
-              // Shop links all share /shop so never auto-highlight
-              const isActive = link.path !== '/shop' && location.pathname === link.path;
+              const isActive = location.pathname + location.search === link.path;
 
               return link.hasMega ? (
                 <div

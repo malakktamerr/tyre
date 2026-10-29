@@ -1,6 +1,315 @@
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
 
-const ORANGE = '#C9573A';
+// const ORANGE = '#8B7000';
+
+// const MOCK_USER = {
+//   firstName: 'Salma',
+//   lastName: 'Hassan',
+//   email: 'salma.hassan@example.com',
+// };
+
+// const NAV_ITEMS = [
+//   { label: 'Personal details', path: '/account' },
+//   { label: 'My orders',        path: '/account/orders' },
+//   { label: 'Address book',     path: '/account/addresses' },
+//   { label: 'Saved pieces',     path: '/account/saved' },
+//   { label: 'Preferences',      path: '/account/preferences' },
+// ];
+
+// /* ── Mock orders data ─────────────────────────────────────────────────── */
+// const MOCK_ORDERS = {
+//   'NESEJ-DEMO-2030': {
+//     id: 'NESEJ-DEMO-2030',
+//     status: 'Delivered',
+//     items: [
+//       { id: 1, name: 'Relaxed linen shirt', variant: 'Oat · Size M · Qty 1', price: 'EGP 1,250', image: '/40bb3e5bf4d0c3683fdb021c735af53e470c00bf.jpg' },
+//       { id: 2, name: 'Soft rib tee',        variant: 'Cream · Size M · Qty 1', price: 'EGP 720',   image: '/a650346682558fb9b59d53bea266cca6c9ae4e9e.jpg' },
+//     ],
+//     address: {
+//       label: 'Home · Default delivery address',
+//       name: 'Salma Hassan',
+//       line1: '18 El Nozha Street, Apartment 4, Floor 2',
+//       line2: 'Heliopolis, Cairo, Egypt',
+//       phone: '+20 100 123 4567',
+//       note: 'Sample customer details',
+//       email: 'salma.hassan@example.com',
+//     },
+//     subtotal:  'EGP 1,970',
+//     delivery:  'EGP 60',
+//     total:     'EGP 2,030',
+//   },
+//   'NESEJ-DEMO-1650': {
+//     id: 'NESEJ-DEMO-1650',
+//     status: 'Cancelled',
+//     items: [
+//       { id: 1, name: 'Woven midi dress', variant: 'Clay · M · Qty 1', price: 'EGP 1,710', image: '/ce36b5575235158056ba681b0c25c7743486fe47.jpg' },
+//     ],
+//     address: {
+//       label: 'Home · Default delivery address',
+//       name: 'Salma Hassan',
+//       line1: '18 El Nozha Street, Apartment 4, Floor 2',
+//       line2: 'Heliopolis, Cairo, Egypt',
+//       phone: '+20 100 123 4567',
+//       note: 'Sample customer details',
+//       email: 'salma.hassan@example.com',
+//     },
+//     subtotal:  'EGP 1,710',
+//     delivery:  'EGP 60',
+//     total:     'EGP 1,770',
+//   },
+// };
+
+// /* ── Sidebar ──────────────────────────────────────────────────────────── */
+// function Sidebar({ onSignOut }) {
+//   const navigate = useNavigate();
+//   return (
+//     <aside style={{ width: 155, flexShrink: 0 }}>
+//       <div style={{ marginBottom: 20 }}>
+//         <p style={{ fontFamily: 'var(--font-heading)', fontSize: 18, fontWeight: 600, color: '#1a1a1a', margin: '0 0 3px' }}>
+//           {MOCK_USER.firstName} {MOCK_USER.lastName}
+//         </p>
+//         <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', margin: 0, wordBreak: 'break-all' }}>
+//           {MOCK_USER.email}
+//         </p>
+//       </div>
+//       <nav aria-label="Account navigation">
+//         <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+//           {NAV_ITEMS.map(item => {
+//             const isActive = item.label === 'My orders';
+//             return (
+//               <li key={item.label}>
+//                 <button
+//                   onClick={() => navigate(item.path)}
+//                   aria-current={isActive ? 'page' : undefined}
+//                   style={{
+//                     display: 'block', width: '100%', textAlign: 'left',
+//                     fontFamily: 'system-ui,sans-serif', fontSize: 13,
+//                     fontWeight: isActive ? 600 : 400,
+//                     color: isActive ? ORANGE : '#3a3a3a',
+//                     background: isActive ? '#FDF5F0' : 'transparent',
+//                     border: 'none',
+//                     borderLeft: isActive ? `3px solid ${ORANGE}` : '3px solid transparent',
+//                     padding: '8px 10px', cursor: 'pointer',
+//                     borderRadius: '0 6px 6px 0', transition: 'background 0.15s, color 0.15s',
+//                   }}
+//                   onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = '#fafaf8'; e.currentTarget.style.color = '#1a1a1a'; }}}
+//                   onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#3a3a3a'; }}}
+//                 >
+//                   {item.label}
+//                 </button>
+//               </li>
+//             );
+//           })}
+//         </ul>
+//       </nav>
+//       <div style={{ height: 1, background: '#ece8e2', margin: '16px 0' }} />
+//       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+//         <button type="button" onClick={() => navigate('/help')}
+//           style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', textDecoration: 'underline', textUnderlineOffset: 2 }}
+//           onMouseEnter={e => e.currentTarget.style.color = '#555'} onMouseLeave={e => e.currentTarget.style.color = '#888'}
+//         >Need a hand?</button>
+//         <button type="button" onClick={() => navigate('/help')}
+//           style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'underline', textUnderlineOffset: 2 }}
+//           onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+//         >Visit help →</button>
+//         <button
+//           type="button" onClick={onSignOut}
+//           style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', fontWeight: 500 }}
+//           onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+//           onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+//         >
+//           Sign out
+//         </button>
+//       </div>
+//     </aside>
+//   );
+// }
+
+// /* ── Row in order summary card ────────────────────────────────────────── */
+// function SummaryRow({ label, value, bold, large, borderTop }) {
+//   return (
+//     <div style={{
+//       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+//       padding: '10px 0',
+//       borderTop: borderTop ? '1px solid #ece8e2' : 'none',
+//     }}>
+//       <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: large ? 14 : 13, fontWeight: bold ? 600 : 400, color: '#3a3a3a' }}>{label}</span>
+//       <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: large ? 15 : 13, fontWeight: bold ? 700 : 500, color: '#1a1a1a' }}>{value}</span>
+//     </div>
+//   );
+// }
+
+// /* ═══════════════════════════════════════════════════════════════════════
+//    OrderDetailsPage
+//    ═══════════════════════════════════════════════════════════════════════ */
+// export default function OrderDetailsPage() {
+//   const navigate  = useNavigate();
+//   const { id }    = useParams();
+//   const order     = MOCK_ORDERS[id];
+
+//   if (!order) {
+//     return (
+//       <div style={{ padding: 48, fontFamily: 'system-ui,sans-serif', color: '#888' }}>
+//         Order not found.{' '}
+//         <button onClick={() => navigate('/account/orders')} style={{ color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
+//           Back to orders
+//         </button>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div style={{ background: '#fff', minHeight: '100vh' }}>
+//       <div style={{ maxWidth: 1400, margin: 0, padding: 'clamp(20px,3vw,36px) clamp(40px,6%,88px)' }}>
+
+//         {/* Two-column layout */}
+//         <div style={{ display: 'flex', gap: 'clamp(32px,5vw,64px)', alignItems: 'flex-start' }}>
+
+//           {/* ── Sidebar ── */}
+//           <Sidebar onSignOut={() => navigate('/')} />
+
+//           {/* ── Main content ── */}
+//           <div style={{ flex: 1, minWidth: 0 }}>
+
+//             {/* Back link */}
+//             <button
+//               type="button"
+//               onClick={() => navigate('/account/orders')}
+//               style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 4 }}
+//               onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+//               onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+//             >
+//               ← Back to my orders
+//             </button>
+
+//             {/* Three-column: items | gap | order summary */}
+//             <div style={{ display: 'flex', gap: 32, alignItems: 'flex-start' }}>
+
+//               {/* ── Left: items + address ── */}
+//               <div style={{ flex: 1, minWidth: 0 }}>
+
+//                 {/* Section heading */}
+//                 <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 26, fontWeight: 400, color: '#1a1a1a', margin: '0 0 20px', lineHeight: 1.15 }}>
+//                   Purchased pieces
+//                 </h2>
+
+//                 {/* Item list */}
+//                 <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
+//                   {order.items.map(item => (
+//                     <div key={item.id} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+//                       {/* Image */}
+//                       <div style={{ width: 80, height: 88, borderRadius: 8, overflow: 'hidden', background: '#f2eeea', flexShrink: 0 }}>
+//                         <img
+//                           src={item.image}
+//                           alt={item.name}
+//                           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+//                           onError={e => { e.target.style.display = 'none'; }}
+//                         />
+//                       </div>
+//                       {/* Info */}
+//                       <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+//                         <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, fontWeight: 700, color: '#1a1a1a', margin: 0 }}>{item.name}</p>
+//                         <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', margin: 0 }}>{item.variant}</p>
+//                         <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 700, color: '#1a1a1a', margin: '4px 0 0' }}>{item.price}</p>
+//                       </div>
+//                     </div>
+//                   ))}
+//                 </div>
+
+//                 {/* Divider */}
+//                 <div style={{ height: 1, background: '#ece8e2', marginBottom: 24 }} />
+
+//                 {/* Delivery address */}
+//                 <div>
+//                   <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 20, fontWeight: 400, color: '#1a1a1a', margin: '0 0 16px' }}>
+//                     {order.address.label}
+//                   </h3>
+//                   <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+//                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{order.address.name}</p>
+//                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{order.address.line1}</p>
+//                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{order.address.line2}</p>
+//                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{order.address.phone}</p>
+//                   </div>
+//                   {order.address.note && (
+//                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#aaa', margin: '12px 0 0' }}>{order.address.note}</p>
+//                   )}
+//                   {order.address.email && (
+//                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#aaa', margin: '4px 0 0' }}>
+//                       Contact: {order.address.email}
+//                     </p>
+//                   )}
+//                 </div>
+//               </div>
+
+//               {/* ── Right: order summary + help ── */}
+//               <div style={{ width: 240, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+
+//                 {/* Order total card */}
+//                 <div style={{ background: '#FCFBF8', border: '1px solid #ece8e2', borderRadius: 12, padding: '20px 20px 16px' }}>
+//                   <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 20, fontWeight: 400, color: '#1a1a1a', margin: '0 0 4px' }}>
+//                     Order total
+//                   </h3>
+//                   <SummaryRow label="Subtotal"             value={order.subtotal} />
+//                   <SummaryRow label="Delivery · illustrative" value={order.delivery} />
+//                   <SummaryRow label="Total" value={order.total} bold large borderTop />
+//                   <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 11, color: '#aaa', margin: '8px 0 0' }}>
+//                     All prices in EGP · Sample totals
+//                   </p>
+//                 </div>
+
+//                 {/* A little help card */}
+//                 <div style={{ background: '#FCFBF8', border: '1px solid #ece8e2', borderRadius: 12, padding: '20px' }}>
+//                   <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 20, fontWeight: 400, color: '#1a1a1a', margin: '0 0 10px' }}>
+//                     A little help
+//                   </h3>
+//                   <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#555', lineHeight: 1.55, margin: '0 0 16px' }}>
+//                     Easy 14-day returns. Choose the piece you'd like to return and tell us why.
+//                   </p>
+//                   <button
+//                     type="button"
+//                     style={{
+//                       width: '100%', background: ORANGE, color: '#fff',
+//                       fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 600,
+//                       border: 'none', borderRadius: 999, padding: '11px 16px',
+//                       cursor: 'pointer', marginBottom: 12,
+//                     }}
+//                     onMouseEnter={e => e.currentTarget.style.background = '#e1c452'}
+//                     onMouseLeave={e => e.currentTarget.style.background = '#FFCC00'}
+//                   >
+//                     Request a return
+//                   </button>
+//                   <button
+//                     type="button"
+//                     style={{
+//                       background: 'none', border: 'none', cursor: 'pointer', padding: 0,
+//                       fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE,
+//                       textDecoration: 'underline', textUnderlineOffset: 2,
+//                     }}
+//                     onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+//                     onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+//                   >
+//                     Contact about this order →
+//                   </button>
+//                 </div>
+
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       <style>{`
+//         @media (max-width: 640px) {
+//           .order-detail-layout { flex-direction: column !important; }
+//         }
+//       `}</style>
+//     </div>
+//   );
+// }
+
+import { Link, useNavigate, useParams } from 'react-router-dom';
+
+const ORANGE = '#8B7000';
 
 const MOCK_USER = {
   firstName: 'Salma',
@@ -12,7 +321,7 @@ const NAV_ITEMS = [
   { label: 'Personal details', path: '/account' },
   { label: 'My orders',        path: '/account/orders' },
   { label: 'Address book',     path: '/account/addresses' },
-  { label: 'Saved pieces',     path: '/account/saved' },
+  { label: 'Saved tyres',      path: '/account/saved' },
   { label: 'Preferences',      path: '/account/preferences' },
 ];
 
@@ -20,10 +329,11 @@ const NAV_ITEMS = [
 const MOCK_ORDERS = {
   'NESEJ-DEMO-2030': {
     id: 'NESEJ-DEMO-2030',
+    date: '08 October 2026',
     status: 'Delivered',
     items: [
-      { id: 1, name: 'Relaxed linen shirt', variant: 'Oat · Size M · Qty 1', price: 'EGP 1,250', image: '/40bb3e5bf4d0c3683fdb021c735af53e470c00bf.jpg' },
-      { id: 2, name: 'Soft rib tee',        variant: 'Cream · Size M · Qty 1', price: 'EGP 720',   image: '/a650346682558fb9b59d53bea266cca6c9ae4e9e.jpg' },
+      { id: 1, name: 'City Touring', variant: '205/55 R16 · 91V · Qty 1', price: 'EGP 1,250', image: '/tyre.png' },
+      { id: 2, name: 'City Compact', variant: '175/65 R14 · 82T · Qty 1', price: 'EGP 720',   image: '/tyre2.png' },
     ],
     address: {
       label: 'Home · Default delivery address',
@@ -40,9 +350,10 @@ const MOCK_ORDERS = {
   },
   'NESEJ-DEMO-1650': {
     id: 'NESEJ-DEMO-1650',
+    date: '02 September 2026',
     status: 'Cancelled',
     items: [
-      { id: 1, name: 'Woven midi dress', variant: 'Clay · M · Qty 1', price: 'EGP 1,710', image: '/ce36b5575235158056ba681b0c25c7743486fe47.jpg' },
+      { id: 1, name: 'Road Comfort', variant: '215/60 R16 · Qty 1', price: 'EGP 1,710', image: '/tyre3.png' },
     ],
     address: {
       label: 'Home · Default delivery address',
@@ -63,17 +374,17 @@ const MOCK_ORDERS = {
 function Sidebar({ onSignOut }) {
   const navigate = useNavigate();
   return (
-    <aside style={{ width: 155, flexShrink: 0 }}>
-      <div style={{ marginBottom: 20 }}>
-        <p style={{ fontFamily: 'var(--font-heading)', fontSize: 18, fontWeight: 600, color: '#1a1a1a', margin: '0 0 3px' }}>
+    <aside style={{ width: 220, flexShrink: 0 }}>
+      <div style={{ marginBottom: 24 }}>
+        <p style={{ fontFamily: 'var(--font-heading)', fontSize: 18, fontWeight: 600, color: '#1a1a1a', margin: '0 0 4px' }}>
           {MOCK_USER.firstName} {MOCK_USER.lastName}
         </p>
-        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', margin: 0, wordBreak: 'break-all' }}>
+        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#666', margin: 0, wordBreak: 'break-all' }}>
           {MOCK_USER.email}
         </p>
       </div>
       <nav aria-label="Account navigation">
-        <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '4px' }}>
           {NAV_ITEMS.map(item => {
             const isActive = item.label === 'My orders';
             return (
@@ -83,17 +394,17 @@ function Sidebar({ onSignOut }) {
                   aria-current={isActive ? 'page' : undefined}
                   style={{
                     display: 'block', width: '100%', textAlign: 'left',
-                    fontFamily: 'system-ui,sans-serif', fontSize: 13,
+                    fontFamily: 'system-ui,sans-serif', fontSize: 14,
                     fontWeight: isActive ? 600 : 400,
-                    color: isActive ? ORANGE : '#3a3a3a',
-                    background: isActive ? '#FDF5F0' : 'transparent',
+                    color: isActive ? '#1a1a1a' : '#555',
+                    background: 'transparent',
                     border: 'none',
-                    borderLeft: isActive ? `3px solid ${ORANGE}` : '3px solid transparent',
-                    padding: '8px 10px', cursor: 'pointer',
-                    borderRadius: '0 6px 6px 0', transition: 'background 0.15s, color 0.15s',
+                    borderLeft: isActive ? `2px solid #1a1a1a` : '2px solid transparent',
+                    padding: '6px 12px', cursor: 'pointer',
+                    transition: 'color 0.15s',
                   }}
-                  onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = '#fafaf8'; e.currentTarget.style.color = '#1a1a1a'; }}}
-                  onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#3a3a3a'; }}}
+                  onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = '#1a1a1a'; }}
+                  onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = '#555'; }}
                 >
                   {item.label}
                 </button>
@@ -102,24 +413,20 @@ function Sidebar({ onSignOut }) {
           })}
         </ul>
       </nav>
-      <div style={{ height: 1, background: '#ece8e2', margin: '16px 0' }} />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <button type="button" onClick={() => navigate('/help')}
-          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', textDecoration: 'underline', textUnderlineOffset: 2 }}
-          onMouseEnter={e => e.currentTarget.style.color = '#555'} onMouseLeave={e => e.currentTarget.style.color = '#888'}
-        >Need a hand?</button>
-        <button type="button" onClick={() => navigate('/help')}
-          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'underline', textUnderlineOffset: 2 }}
-          onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-        >Visit help →</button>
+      <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', gap: 8 }}>
         <button
           type="button" onClick={onSignOut}
-          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', fontWeight: 500 }}
+          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' }}
           onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
           onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
           Sign out
         </button>
+        <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#444' }}>Need a hand?</span>
+        <button type="button" onClick={() => navigate('/help')}
+          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', textDecoration: 'underline', textUnderlineOffset: 2 }}
+          onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+        >Visit help →</button>
       </div>
     </aside>
   );
@@ -131,9 +438,9 @@ function SummaryRow({ label, value, bold, large, borderTop }) {
     <div style={{
       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       padding: '10px 0',
-      borderTop: borderTop ? '1px solid #ece8e2' : 'none',
+      borderTop: borderTop ? '1px solid #e4d8cb' : 'none',
     }}>
-      <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: large ? 14 : 13, fontWeight: bold ? 600 : 400, color: '#3a3a3a' }}>{label}</span>
+      <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: large ? 14 : 13, fontWeight: bold ? 600 : 400, color: '#444' }}>{label}</span>
       <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: large ? 15 : 13, fontWeight: bold ? 700 : 500, color: '#1a1a1a' }}>{value}</span>
     </div>
   );
@@ -145,25 +452,50 @@ function SummaryRow({ label, value, bold, large, borderTop }) {
 export default function OrderDetailsPage() {
   const navigate  = useNavigate();
   const { id }    = useParams();
-  const order     = MOCK_ORDERS[id];
-
-  if (!order) {
-    return (
-      <div style={{ padding: 48, fontFamily: 'system-ui,sans-serif', color: '#888' }}>
-        Order not found.{' '}
-        <button onClick={() => navigate('/account/orders')} style={{ color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
-          Back to orders
-        </button>
-      </div>
-    );
-  }
+  const order     = MOCK_ORDERS[id] || MOCK_ORDERS['NESEJ-DEMO-2030'];
 
   return (
-    <div style={{ background: '#fff', minHeight: '100vh' }}>
-      <div style={{ maxWidth: 1400, margin: 0, padding: 'clamp(20px,3vw,36px) clamp(40px,6%,88px)' }}>
+    <div style={{ background: '#fff', minHeight: '100vh', width: '100%', boxSizing: 'border-box', paddingBottom: 60 }}>
+      
+      <style>{`
+        @media (max-width: 900px) {
+          .order-detail-content { flex-direction: column !important; gap: 32px !important; }
+          .order-detail-main { flex-direction: column !important; gap: 32px !important; }
+          .order-summary-box { width: 100% !important; }
+        }
+      `}</style>
+
+      <div style={{ maxWidth: 1300, margin: '0 auto', padding: '32px clamp(20px,4%,60px)' }}>
+
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" style={{ marginBottom: 16 }}>
+          <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
+            {[{ label: 'Home', path: '/' }, { label: 'My account', path: '/account' }, { label: 'Your order, thoughtfully.', path: '#' }].map((c, i, arr) => (
+              <li key={c.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                {i < arr.length - 1 ? (
+                  <><Link to={c.path} style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', textDecoration: 'none' }}
+                    onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'} onMouseLeave={e => e.currentTarget.style.color = '#888'}
+                  >{c.label}</Link><span style={{ color: '#ccc', fontSize: 12 }}>/</span></>
+                ) : (
+                  <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888' }} aria-current="page">{c.label}</span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        {/* Top Header */}
+        <div style={{ marginBottom: 32 }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(32px, 4vw, 42px)', fontWeight: 400, color: '#1a1a1a', margin: '0 0 6px', lineHeight: 1.1 }}>
+            Your order, thoughtfully.
+          </h1>
+          <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#555', margin: 0 }}>
+            {order.id} · Sample order · {order.date}
+          </p>
+        </div>
 
         {/* Two-column layout */}
-        <div style={{ display: 'flex', gap: 'clamp(32px,5vw,64px)', alignItems: 'flex-start' }}>
+        <div className="order-detail-content" style={{ display: 'flex', gap: 'clamp(32px,5vw,64px)', alignItems: 'flex-start' }}>
 
           {/* ── Sidebar ── */}
           <Sidebar onSignOut={() => navigate('/')} />
@@ -175,66 +507,66 @@ export default function OrderDetailsPage() {
             <button
               type="button"
               onClick={() => navigate('/account/orders')}
-              style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 4 }}
+              style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 6 }}
               onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
               onMouseLeave={e => e.currentTarget.style.opacity = '1'}
             >
               ← Back to my orders
             </button>
 
-            {/* Three-column: items | gap | order summary */}
-            <div style={{ display: 'flex', gap: 32, alignItems: 'flex-start' }}>
+            {/* Two-column layout inside main: items/address | summary */}
+            <div className="order-detail-main" style={{ display: 'flex', gap: 32, alignItems: 'flex-start' }}>
 
               {/* ── Left: items + address ── */}
               <div style={{ flex: 1, minWidth: 0 }}>
 
                 {/* Section heading */}
-                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 26, fontWeight: 400, color: '#1a1a1a', margin: '0 0 20px', lineHeight: 1.15 }}>
-                  Purchased pieces
+                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 24, fontWeight: 400, color: '#1a1a1a', margin: '0 0 20px', lineHeight: 1.15 }}>
+                  Purchased tyres
                 </h2>
 
                 {/* Item list */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 24, marginBottom: 36 }}>
                   {order.items.map(item => (
                     <div key={item.id} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
                       {/* Image */}
-                      <div style={{ width: 80, height: 88, borderRadius: 8, overflow: 'hidden', background: '#f2eeea', flexShrink: 0 }}>
+                      <div style={{ width: 70, height: 78, borderRadius: 8, overflow: 'hidden', background: '#fff', border: '1px solid #f0ece6', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <img
                           src={item.image}
                           alt={item.name}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                          style={{ width: '85%', height: '85%', objectFit: 'contain', display: 'block' }}
                           onError={e => { e.target.style.display = 'none'; }}
                         />
                       </div>
                       {/* Info */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, fontWeight: 700, color: '#1a1a1a', margin: 0 }}>{item.name}</p>
-                        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', margin: 0 }}>{item.variant}</p>
-                        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 700, color: '#1a1a1a', margin: '4px 0 0' }}>{item.price}</p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2, paddingTop: 2 }}>
+                        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, fontWeight: 600, color: '#1a1a1a', margin: 0 }}>{item.name}</p>
+                        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#666', margin: 0 }}>{item.variant}</p>
+                        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 600, color: '#1a1a1a', margin: '4px 0 0' }}>{item.price}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
                 {/* Divider */}
-                <div style={{ height: 1, background: '#ece8e2', marginBottom: 24 }} />
+                <div style={{ height: 1, background: '#f0ece6', marginBottom: 28 }} />
 
                 {/* Delivery address */}
                 <div>
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 20, fontWeight: 400, color: '#1a1a1a', margin: '0 0 16px' }}>
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 18, fontWeight: 400, color: '#1a1a1a', margin: '0 0 12px' }}>
                     {order.address.label}
                   </h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{order.address.name}</p>
                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{order.address.line1}</p>
                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{order.address.line2}</p>
                     <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{order.address.phone}</p>
                   </div>
                   {order.address.note && (
-                    <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#aaa', margin: '12px 0 0' }}>{order.address.note}</p>
+                    <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#777', margin: '12px 0 4px' }}>{order.address.note}</p>
                   )}
                   {order.address.email && (
-                    <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#aaa', margin: '4px 0 0' }}>
+                    <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#777', margin: 0 }}>
                       Contact: {order.address.email}
                     </p>
                   )}
@@ -242,39 +574,40 @@ export default function OrderDetailsPage() {
               </div>
 
               {/* ── Right: order summary + help ── */}
-              <div style={{ width: 240, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div className="order-summary-box" style={{ width: 280, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
 
                 {/* Order total card */}
-                <div style={{ background: '#FCFBF8', border: '1px solid #ece8e2', borderRadius: 12, padding: '20px 20px 16px' }}>
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 20, fontWeight: 400, color: '#1a1a1a', margin: '0 0 4px' }}>
+                <div style={{ background: '#F9F8F6', border: '1px solid #f0ece6', borderRadius: 12, padding: '20px 20px 16px' }}>
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 18, fontWeight: 400, color: '#1a1a1a', margin: '0 0 12px' }}>
                     Order total
                   </h3>
-                  <SummaryRow label="Subtotal"             value={order.subtotal} />
+                  <SummaryRow label="Subtotal"            value={order.subtotal} />
                   <SummaryRow label="Delivery · illustrative" value={order.delivery} />
                   <SummaryRow label="Total" value={order.total} bold large borderTop />
-                  <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 11, color: '#aaa', margin: '8px 0 0' }}>
+                  <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 11, color: '#777', margin: '12px 0 0' }}>
                     All prices in EGP · Sample totals
                   </p>
                 </div>
 
                 {/* A little help card */}
-                <div style={{ background: '#FCFBF8', border: '1px solid #ece8e2', borderRadius: 12, padding: '20px' }}>
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 20, fontWeight: 400, color: '#1a1a1a', margin: '0 0 10px' }}>
+                <div style={{ background: '#F9F8F6', border: '1px solid #f0ece6', borderRadius: 12, padding: '20px' }}>
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '18px', fontWeight: 400, color: '#1a1a1a', margin: '0 0 10px' }}>
                     A little help
                   </h3>
                   <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#555', lineHeight: 1.55, margin: '0 0 16px' }}>
-                    Easy 14-day returns. Choose the piece you'd like to return and tell us why.
+                    Easy 14-day returns. Choose the tyre you'd like to return and tell us why.
                   </p>
                   <button
                     type="button"
                     style={{
-                      width: '100%', background: ORANGE, color: '#fff',
+                      width: '100%', background: '#FFCC00', color: '#1a1a1a',
                       fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 600,
                       border: 'none', borderRadius: 999, padding: '11px 16px',
                       cursor: 'pointer', marginBottom: 12,
+                      transition: 'background 0.15s',
                     }}
-                    onMouseEnter={e => e.currentTarget.style.background = '#b84d32'}
-                    onMouseLeave={e => e.currentTarget.style.background = ORANGE}
+                    onMouseEnter={e => e.currentTarget.style.background = '#e6b800'}
+                    onMouseLeave={e => e.currentTarget.style.background = '#FFCC00'}
                   >
                     Request a return
                   </button>
@@ -293,16 +626,11 @@ export default function OrderDetailsPage() {
                 </div>
 
               </div>
+
             </div>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 640px) {
-          .order-detail-layout { flex-direction: column !important; }
-        }
-      `}</style>
     </div>
   );
 }

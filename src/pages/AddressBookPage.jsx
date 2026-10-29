@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-const ORANGE = '#C9573A';
+import { Link, useNavigate } from 'react-router-dom';
+
+const ORANGE = '#8B7000';
 
 const MOCK_USER = {
   firstName: 'Salma',
@@ -12,7 +13,7 @@ const NAV_ITEMS = [
   { label: 'Personal details', path: '/account' },
   { label: 'My orders',        path: '/account/orders' },
   { label: 'Address book',     path: '/account/addresses' },
-  { label: 'Saved pieces',     path: '/account/saved' },
+  { label: 'Saved tyres',      path: '/account/saved' },
   { label: 'Preferences',      path: '/account/preferences' },
 ];
 
@@ -43,7 +44,7 @@ const EMPTY_FORM = { label: '', name: '', line1: '', line2: '', phone: '' };
 function Sidebar({ onSignOut }) {
   const navigate = useNavigate();
   return (
-    <aside style={{ width: 155, flexShrink: 0 }}>
+    <aside style={{ width: 180, flexShrink: 0 }}>
       <div style={{ marginBottom: 20 }}>
         <p style={{ fontFamily: 'var(--font-heading)', fontSize: 18, fontWeight: 600, color: '#1a1a1a', margin: '0 0 3px' }}>
           {MOCK_USER.firstName} {MOCK_USER.lastName}
@@ -92,10 +93,11 @@ function Sidebar({ onSignOut }) {
         >
           Sign out
         </button>
+        <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888' }}>Need a hand?</span>
         <button type="button" onClick={() => navigate('/help')}
-          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', textDecoration: 'underline', textUnderlineOffset: 2 }}
-          onMouseEnter={e => e.currentTarget.style.color = '#555'} onMouseLeave={e => e.currentTarget.style.color = '#888'}
-        >Need a hand?</button>
+          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: ORANGE, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', textDecoration: 'underline', textUnderlineOffset: 2 }}
+          onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+        >Visit help →</button>
       </div>
     </aside>
   );
@@ -130,8 +132,8 @@ function AddressFormModal({ initial, onSave, onClose }) {
 
   const inputStyle = (err) => ({
     fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#1a1a1a',
-    background: '#fff', border: `1px solid ${err ? '#dc2626' : '#ddd8d0'}`,
-    borderRadius: 10, padding: '10px 14px', outline: 'none',
+    background: '#fff', border: `1px solid ${err ? '#dc2626' : '#dcd6cd'}`,
+    borderRadius: 8, padding: '10px 14px', outline: 'none',
     width: '100%', boxSizing: 'border-box',
   });
 
@@ -145,12 +147,33 @@ function AddressFormModal({ initial, onSave, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.45)', zIndex: 1000 }}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'rgba(0,0,0,0.45)',
+        zIndex: 9999,
+        padding: 16,
+        boxSizing: 'border-box'
+      }}
       onClick={onClose}
     >
       <div
-        style={{ background: '#fff', borderRadius: 14, padding: 32, width: '100%', maxWidth: 460, boxShadow: '0 16px 60px rgba(0,0,0,0.14)' }}
+        style={{
+          background: '#F9F8F6',
+          borderRadius: 16,
+          padding: 32,
+          width: '100%',
+          maxWidth: 460,
+          border: '1px solid #f0ece6',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
+          boxSizing: 'border-box'
+        }}
         onClick={e => e.stopPropagation()}
       >
         <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 22, fontWeight: 400, color: '#1a1a1a', margin: '0 0 20px' }}>
@@ -165,26 +188,26 @@ function AddressFormModal({ initial, onSave, onClose }) {
               <input
                 id={f.id} value={form[f.field]} onChange={change(f.field)}
                 style={inputStyle(errors[f.field])}
-                onFocus={e => { e.target.style.borderColor = ORANGE; e.target.style.boxShadow = '0 0 0 2px rgba(201,87,58,0.12)'; }}
-                onBlur={e  => { e.target.style.borderColor = errors[f.field] ? '#dc2626' : '#ddd8d0'; e.target.style.boxShadow = 'none'; }}
+                onFocus={e => { e.target.style.borderColor = '#1a1a1a'; }}
+                onBlur={e  => { e.target.style.borderColor = errors[f.field] ? '#dc2626' : '#dcd6cd'; }}
               />
               {errors[f.field] && <p style={{ fontSize: 11, color: '#dc2626', margin: '3px 0 0', fontFamily: 'system-ui,sans-serif' }}>{errors[f.field]}</p>}
             </div>
           ))}
-          <div style={{ display: 'flex', gap: 12, marginTop: 4 }}>
+          <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
             <button
               type="submit"
-              style={{ flex: 1, background: ORANGE, color: '#fff', fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 600, border: 'none', borderRadius: 999, padding: '11px 16px', cursor: 'pointer' }}
-              onMouseEnter={e => e.currentTarget.style.background = '#b84d32'}
-              onMouseLeave={e => e.currentTarget.style.background = ORANGE}
+              style={{ flex: 1, background: '#FFCC00', color: '#1a1a1a', fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 600, border: 'none', borderRadius: 999, padding: '11px 16px', cursor: 'pointer' }}
+              onMouseEnter={e => e.currentTarget.style.background = '#e6b800'}
+              onMouseLeave={e => e.currentTarget.style.background = '#FFCC00'}
             >
               Save address
             </button>
             <button
               type="button" onClick={onClose}
-              style={{ background: 'none', border: '1px solid #ddd8d0', borderRadius: 999, fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', padding: '11px 20px', cursor: 'pointer' }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = '#aaa'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = '#ddd8d0'}
+              style={{ background: '#fff', border: '1px solid #dcd6cd', borderRadius: 999, fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#1a1a1a', padding: '11px 20px', cursor: 'pointer' }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = '#1a1a1a'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = '#dcd6cd'}
             >
               Cancel
             </button>
@@ -197,36 +220,35 @@ function AddressFormModal({ initial, onSave, onClose }) {
 
 /* ── Address card ─────────────────────────────────────────────────────── */
 function AddressCard({ address, onEdit, onRemove, onMakeDefault }) {
-  const navigate = useNavigate();
   return (
-    <div style={{ background: '#FCFBF8', border: '1px solid #ece8e2', borderRadius: 12, padding: '28px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', boxSizing: 'border-box' }}>
+    <div style={{ background: '#F9F8F6', border: '1px solid #f0ece6', borderRadius: 16, padding: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', boxSizing: 'border-box' }}>
       {/* Label + Default badge */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-        <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 19, fontWeight: 500, color: '#1a1a1a', margin: 0 }}>
+        <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 18, fontWeight: 500, color: '#1a1a1a', margin: 0 }}>
           {address.label}
         </h3>
         {address.isDefault && (
-          <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', fontWeight: 400 }}>
+          <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: ORANGE, fontWeight: 500 }}>
             ( Default )
           </span>
         )}
       </div>
 
       {/* Address lines */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 14 }}>
-        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{address.name}</p>
-        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{address.line1}</p>
-        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{address.line2}</p>
-        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#3a3a3a', margin: 0 }}>{address.phone}</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 16 }}>
+        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#1a1a1a', margin: 0, fontWeight: 500 }}>{address.name}</p>
+        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#444', margin: 0 }}>{address.line1}</p>
+        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#444', margin: 0 }}>{address.line2}</p>
+        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#444', margin: 0 }}>{address.phone}</p>
       </div>
 
       {/* Actions */}
-      <div style={{ display: 'flex', gap: 14, marginBottom: address.isDefault ? 10 : 0 }}>
+      <div style={{ display: 'flex', gap: 16, marginBottom: address.isDefault ? 12 : 0 }}>
         <button
-          type="button" onClick={() => navigate(`/account/addresses/${address.id}/edit`)}
-          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#3a3a3a', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'underline', textUnderlineOffset: 2 }}
-          onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'}
-          onMouseLeave={e => e.currentTarget.style.color = '#3a3a3a'}
+          type="button" onClick={onEdit}
+          style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#1a1a1a', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'underline', textUnderlineOffset: 2 }}
+          onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
           Edit address
         </button>
@@ -242,19 +264,20 @@ function AddressCard({ address, onEdit, onRemove, onMakeDefault }) {
 
       {/* Default note or Make default button */}
       {address.isDefault ? (
-        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#aaa', margin: 0 }}>
+        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 11, color: '#777', margin: 0 }}>
           Default address · Used as your first delivery choice.
         </p>
       ) : (
         <button
           type="button" onClick={onMakeDefault}
           style={{
-            alignSelf: 'flex-start', background: '#fff', border: '1px solid #ddd8d0',
+            alignSelf: 'flex-start', background: '#fff', border: '1px solid #dcd6cd',
             borderRadius: 999, fontFamily: 'system-ui,sans-serif', fontSize: 12,
-            color: '#1a1a1a', padding: '7px 16px', cursor: 'pointer', marginTop: 4,
+            color: '#1a1a1a', padding: '6px 16px', cursor: 'pointer', marginTop: 4,
+            transition: 'border-color 0.15s',
           }}
-          onMouseEnter={e => e.currentTarget.style.borderColor = '#aaa'}
-          onMouseLeave={e => e.currentTarget.style.borderColor = '#ddd8d0'}
+          onMouseEnter={e => e.currentTarget.style.borderColor = '#1a1a1a'}
+          onMouseLeave={e => e.currentTarget.style.borderColor = '#dcd6cd'}
         >
           Make default
         </button>
@@ -269,6 +292,7 @@ function AddressCard({ address, onEdit, onRemove, onMakeDefault }) {
 export default function AddressBookPage() {
   const navigate = useNavigate();
   const [addresses, setAddresses] = useState(INITIAL_ADDRESSES);
+  const [modal, setModal] = useState(null); // null | { mode: 'add' } | { mode: 'edit', address }
 
   const handleSave = (form) => {
     if (modal.mode === 'add') {
@@ -282,7 +306,6 @@ export default function AddressBookPage() {
   const handleRemove = (id) => {
     setAddresses(prev => {
       const next = prev.filter(a => a.id !== id);
-      // if we removed the default, make first one default
       if (next.length && !next.some(a => a.isDefault)) next[0].isDefault = true;
       return next;
     });
@@ -293,23 +316,23 @@ export default function AddressBookPage() {
   };
 
   return (
-    <div style={{ background: '#fff', minHeight: '100vh' }}>
-      <div style={{ maxWidth: 1400, margin: 0, padding: 'clamp(20px,3vw,36px) clamp(40px,6%,88px)' }}>
+    <div style={{ background: '#fff', minHeight: '100vh', width: '100%', boxSizing: 'border-box', paddingBottom: 60 }}>
+      <div style={{ maxWidth: 1300, margin: '0 auto', padding: '32px clamp(20px,4%,60px)' }}>
 
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" style={{ marginBottom: 12 }}>
+        <nav aria-label="Breadcrumb" style={{ marginBottom: 16 }}>
           <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
             {[{ label: 'Home', path: '/' }, { label: 'My account', path: '/account' }, { label: 'Address book', path: '/account/addresses' }].map((c, i, arr) => (
               <li key={c.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 {i < arr.length - 1 ? (
                   <>
-                    <button onClick={() => navigate(c.path)} style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                    <Link to={c.path} style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#888', textDecoration: 'none' }}
                       onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'} onMouseLeave={e => e.currentTarget.style.color = '#888'}
-                    >{c.label}</button>
+                    >{c.label}</Link>
                     <span style={{ color: '#ccc', fontSize: 12 }}>/</span>
                   </>
                 ) : (
-                  <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#3a3a3a' }} aria-current="page">{c.label}</span>
+                  <span style={{ fontFamily: 'system-ui,sans-serif', fontSize: 12, color: '#1a1a1a' }} aria-current="page">{c.label}</span>
                 )}
               </li>
             ))}
@@ -317,18 +340,15 @@ export default function AddressBookPage() {
         </nav>
 
         {/* Page heading */}
-        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(32px,4vw,48px)', fontWeight: 400, color: '#1a1a1a', margin: '0 0 6px', lineHeight: 1.1 }}>
+        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(32px,4vw,42px)', fontWeight: 400, color: '#1a1a1a', margin: '0 0 6px', lineHeight: 1.1 }}>
           Address book
         </h1>
-        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#888', margin: 0 }}>
+        <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#555', margin: 0 }}>
           The places your everyday can find you.
         </p>
 
-        {/* Divider */}
-        <div style={{ height: 1, background: '#ece8e2', margin: '16px 0 28px' }} />
-
         {/* Two-column layout */}
-        <div style={{ display: 'flex', gap: 'clamp(32px,5vw,64px)', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', gap: 'clamp(32px,5vw,64px)', alignItems: 'flex-start', marginTop: 40 }}>
 
           {/* Sidebar */}
           <Sidebar onSignOut={() => navigate('/')} />
@@ -338,19 +358,20 @@ export default function AddressBookPage() {
 
             {/* Top row: count + Add button */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
-              <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#888', margin: 0 }}>
+              <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#666', margin: 0 }}>
                 {addresses.length} saved address{addresses.length !== 1 ? 'es' : ''}
               </p>
               <button
                 type="button"
-                onClick={() => navigate('/account/addresses/new')}
+                onClick={() => setModal({ mode: 'add' })}
                 style={{
-                  background: ORANGE, color: '#fff',
+                  background: '#FFCC00', color: '#1a1a1a',
                   fontFamily: 'system-ui,sans-serif', fontSize: 13, fontWeight: 600,
                   border: 'none', borderRadius: 999, padding: '10px 22px', cursor: 'pointer',
+                  transition: 'background 0.15s',
                 }}
-                onMouseEnter={e => e.currentTarget.style.background = '#b84d32'}
-                onMouseLeave={e => e.currentTarget.style.background = ORANGE}
+                onMouseEnter={e => e.currentTarget.style.background = '#e6b800'}
+                onMouseLeave={e => e.currentTarget.style.background = '#FFCC00'}
               >
                 Add an address
               </button>
@@ -358,12 +379,12 @@ export default function AddressBookPage() {
 
             {/* Address cards grid */}
             {addresses.length === 0 ? (
-              <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#aaa', padding: '24px 0' }}>
+              <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 14, color: '#666', padding: '24px 0' }}>
                 No saved addresses yet.
               </p>
             ) : (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20, alignItems: 'stretch' }}>
-                {addresses.map(addr => (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 20, alignItems: 'stretch' }}>
+                {addresses.link === undefined && addresses.map(addr => (
                   <AddressCard
                     key={addr.id}
                     address={addr}
@@ -379,6 +400,14 @@ export default function AddressBookPage() {
         </div>
       </div>
 
+      {/* Modal */}
+      {modal && (
+        <AddressFormModal
+          initial={modal.mode === 'edit' ? modal.address : null}
+          onSave={handleSave}
+          onClose={() => setModal(null)}
+        />
+      )}
     </div>
   );
 }
