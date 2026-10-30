@@ -43,17 +43,17 @@ export default function LinenEditBanner() {
         {/* ── الجانب الأيسر: النصوص والزر ── */}
         <div className="lg:col-span-5 flex flex-col items-start text-left">
           <h2
-            className="text-white mb-6 tracking-normal"
-            style={{
-              fontFamily: "'Black Ops One', 'Post No Bills Colombo', sans-serif",
-              fontSize: 'clamp(38px, 4.5vw, 62px)',
-              fontWeight: 400,
-              lineHeight: 1.05,
-            }}
-          >
-            Find your tyres.<br />
-            Own the journey.
-          </h2>
+  className="text-white mb-6 tracking-normal"
+  style={{
+    fontFamily: "'PostNoBillsColombo', sans-serif", // ✅ اسم الخط الصحيح بدون مسافات
+    fontSize: 'clamp(38px, 4.5vw, 62px)',
+    fontWeight: 700, // 👈 ليكون Bold
+    lineHeight: 1.05,
+  }}
+>
+  Find your tyres.<br />
+  Own the journey.
+</h2>
 
           <p className="text-[14px] lg:text-[15px] leading-[1.65] text-white/70 mb-8 max-w-md">
             Compare passenger, SUV and van options side-by-side. Find the right size, compare specifications and get practical guidance on tyre care — all in one place.

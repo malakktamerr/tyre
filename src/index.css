@@ -1097,7 +1097,12 @@ body {
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
-
+@font-face {
+  font-family: 'PostNoBillsColombo';
+  src: url('/fonts/postnobillscolombo-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 .story-banner-btn {
   display: inline-flex;
   align-items: center;

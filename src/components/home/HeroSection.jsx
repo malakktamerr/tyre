@@ -38,11 +38,16 @@ export default function HeroSection() {
   {/* Text content */}
   <div className="relative z-20 w-full px-5 pb-9">
     <h1 
-      className="hero-text-enter hero-text-d2 font-normal leading-[1.06] tracking-[-0.02em] text-white mb-3.5"
-      style={{ fontFamily: "'post no pills combo', sans-serif", fontSize: 'clamp(36px, 10vw, 52px)' }}
-    >
-      Made for<br />every<br />road.
-    </h1>
+  className="hero-text-enter hero-text-d2 font-normal leading-[1.06] tracking-wide text-white mb-3.5"
+  style={{ 
+    fontFamily: "'PostNoBillsColombo', sans-serif", 
+    fontSize: 'clamp(36px, 10vw, 52px)',
+    fontWeight: 400,
+    letterSpacing: '0.03em', // مسافة خفيفة لمنع تداخل الحروف
+  }}
+>
+  Made for<br />every<br />road.
+</h1>
 
     <p 
       className="hero-text-enter hero-text-d3 text-[13px] leading-relaxed text-white/80 mb-5"
@@ -91,15 +96,15 @@ export default function HeroSection() {
         {/* Desktop Text content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-12 lg:px-16 flex flex-col justify-center">
 
-          <h1 
-              className="hero-text-enter hero-text-d2 font-post text-white mb-6"
-            style={{ 
-             fontFamily: "'post no pills combo', sans-serif", 
-             fontSize: 'clamp(45px, 5.5vw, 75px)',
-             lineHeight: '0.95',
-             letterSpacing: '-0.01em'
-            }}
-                       >
+       <h1 
+  className="hero-text-enter hero-text-d2 font-['PostNoBillsColombo'] text-white mb-6 font-bold"
+  style={{ 
+    fontFamily: "'PostNoBillsColombo', sans-serif", 
+    fontSize: 'clamp(45px, 5.5vw, 75px)',
+    lineHeight: '0.95',
+    letterSpacing: '-0.01em'
+  }}
+>
   Made for<br />
   every<br />
   road.

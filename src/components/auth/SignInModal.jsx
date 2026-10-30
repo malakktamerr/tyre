@@ -60,9 +60,19 @@ function PromoCard() {
           onError={e => { e.target.style.display = 'none'; }}
         />
       </div>
-      <h3 style={{ fontFamily: '"Post No Bills Colombo", sans-serif', fontSize: 28, fontWeight: 700, color: '#1a1a1a', lineHeight: 1.2, margin: '0 0 8px' }}>
-        Ready for your next journey.
-      </h3>
+      <h3 
+  style={{ 
+    fontFamily: "'PostNoBillsColombo', sans-serif", // ✅ بدون مسافات ليقرأه المتصفح صح
+    fontSize: 'clamp(32px, 4vw, 44px)', // 👈 تم تكبير الحجم من 28
+    fontWeight: 700, 
+    color: '#1a1a1a', 
+    lineHeight: 1.2, 
+    margin: '0 0 8px',
+    letterSpacing: '0.03em' // 👈 مسافة بين الحروف لمنع التداخل
+  }}
+>
+  Ready for your next journey.
+</h3>
       <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: 13, color: '#555', lineHeight: 1.6, margin: 0 }}>
         Find tyres for your car, your roads and your everyday journeys.
       </p>
@@ -188,10 +198,19 @@ export default function SignInModal({ isOpen, onClose, onSendCode, onVerifyCode,
               Sign in
             </span>
 
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(26px,3vw,34px)', fontWeight: 400, color: '#1a1a1a', lineHeight: 1.15, margin: '0 0 10px' }}>
-              Good to see you.
-            </h2>
-
+           <h2 
+  style={{ 
+    fontFamily: "'PostNoBillsColombo', sans-serif", 
+    fontSize: 'clamp(36px, 4.5vw, 48px)', // 👈 تم تكبير الحجم هنا
+    fontWeight: 700, 
+    color: '#1a1a1a', 
+    lineHeight: 1.15, 
+    margin: '0 0 10px',
+    letterSpacing: '0.03em'
+  }}
+>
+  Good to see you.
+</h2>
             <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#666', lineHeight: 1.55, margin: '0 0 22px' }}>
               Sign in with your email and continue with a verification code.
             </p>
@@ -246,9 +265,19 @@ export default function SignInModal({ isOpen, onClose, onSendCode, onVerifyCode,
               Verify email
             </span>
 
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(26px,3vw,34px)', fontWeight: 400, color: '#1a1a1a', lineHeight: 1.15, margin: '0 0 10px' }}>
-              Verify your email.
-            </h2>
+            <h2 
+  style={{ 
+    fontFamily: "'PostNoBillsColombo', sans-serif", 
+    fontSize: 'clamp(36px, 4.5vw, 48px)', // 👈 تم تكبير الحجم
+    fontWeight: 700, // 👈 تم التعديل إلى Bold
+    color: '#1a1a1a', 
+    lineHeight: 1.15, 
+    margin: '0 0 10px',
+    letterSpacing: '0.03em' // 👈 مسافة مريحة لمنع التصاق الحروف
+  }}
+>
+  Good to see you.
+</h2>
 
             <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: 13, color: '#555', lineHeight: 1.6, margin: '0 0 22px' }}>
               We've sent a verification code to your email. Enter it below to complete your sign-in.

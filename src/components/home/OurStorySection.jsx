@@ -66,17 +66,17 @@ export default function OurStorySection() {
 
         {/* ════════════ TOP CONTENT ════════════ */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-8 lg:px-16 pt-12 md:pt-14">
-          <h2
-            className="mb-3 text-white tracking-normal"
-            style={{
-              fontFamily: "'post no pills combo', sans-serif",
-              fontSize: 'clamp(32px, 4.2vw, 56px)',
-              fontWeight: 400,
-              lineHeight: 1.08,
-            }}
-          >
-            Every journey starts with the right tyres
-          </h2>
+        <h2
+  className="mb-3 text-white tracking-normal font-bold"
+  style={{
+    fontFamily: "'PostNoBillsColombo', sans-serif", // ✅ التعديل هنا (بدون مسافات)
+    fontSize: 'clamp(32px, 4.2vw, 56px)',
+    fontWeight: 400,
+    lineHeight: 1.08,
+  }}
+>
+  Every journey starts with the right tyres
+</h2>
 
           <p
             className="mb-4 text-white/80 max-w-xl"

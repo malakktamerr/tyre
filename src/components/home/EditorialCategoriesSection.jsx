@@ -59,9 +59,16 @@ export default function EditorialCategoriesSection() {
                 {cat.eyebrow}
               </p>
 
-              <h3 className="text-[#141619] text-[20px] lg:text-[22px] font-normal font-serif leading-snug">
-                {cat.heading}
-              </h3>
+              <h3 
+  className="text-[#141619] text-[20px] lg:text-[22px] font-normal leading-snug tracking-wide"
+  style={{
+    fontFamily: "'PostNoBillsColombo', sans-serif",
+    fontWeight: 400,
+    letterSpacing: '0.03em', // مسافة خفيفة بين الحروف لمنع الالتصاق
+  }}
+>
+  {cat.heading}
+</h3>
 
               <Link
                 to={cat.path}

@@ -129,18 +129,18 @@ export default function NewArrivals() {
         
         {/* Header with title and shop link */}
         <div className="flex items-end justify-between mb-6">
-          <h2 
-            id="na-heading-d" 
-            className="text-[#1a1a1a]" 
-            style={{ 
-              fontFamily: "'post no pills combo', sans-serif",
-              fontSize: 'clamp(36px, 4vw, 48px)',
-              fontWeight: 400,
-              lineHeight: 1.1,
-            }}
-          >
-            Find your next set
-          </h2>
+         <h2 
+  id="na-heading-d" 
+  className="text-[#1a1a1a] font-bold" 
+  style={{ 
+    fontFamily: "'PostNoBillsColombo', sans-serif",
+    fontSize: 'clamp(36px, 4vw, 48px)',
+    fontWeight: 700, // 👈 تم التغيير من 400 إلى 700 ليصبح Bold
+    lineHeight: 1.1,
+  }}
+>
+  Find your next set
+</h2>
           <Link 
             to="/new-arrivals" 
             className="text-[14px] text-[#1a1a1a] font-medium inline-flex items-center gap-1 hover:opacity-80 transition-opacity"
