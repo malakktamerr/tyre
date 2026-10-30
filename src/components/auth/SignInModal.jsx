@@ -268,12 +268,12 @@ export default function SignInModal({ isOpen, onClose, onSendCode, onVerifyCode,
             <h2 
   style={{ 
     fontFamily: "'PostNoBillsColombo', sans-serif", 
-    fontSize: 'clamp(36px, 4.5vw, 48px)', // 👈 تم تكبير الحجم
-    fontWeight: 700, // 👈 تم التعديل إلى Bold
+    fontSize: 'clamp(36px, 4.5vw, 48px)', 
+    fontWeight: 700, 
     color: '#1a1a1a', 
     lineHeight: 1.15, 
     margin: '0 0 10px',
-    letterSpacing: '0.03em' // 👈 مسافة مريحة لمنع التصاق الحروف
+    letterSpacing: '0.03em' 
   }}
 >
   Good to see you.
