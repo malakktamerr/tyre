@@ -5,15 +5,15 @@ const categories = [
     eyebrow: 'THE PASSENGER RANGE',
     heading: 'For the everyday drive.',
     linkLabel: 'Shop passenger',
-    path: '/categories',
-    img: '/car1.jpg', // تأكدي أن الصور موجودة في مجلد public
+    path: '/shop?category=passenger', // تم التعديل لتوجيه لصفحة الشوب وفلترة الـ Passenger
+    img: '/car1.jpg',
     bg: '#F8F4EF',
   },
   {
     eyebrow: 'QUIETLY CONSIDERED',
     heading: 'Ease, in every drive.',
     linkLabel: 'Shop SUV',
-    path: '/categories',
+    path: '/shop?category=suv', // تم التعديل لتوجيه لصفحة الشوب وفلترة الـ SUV
     img: '/car2.jpg',
     bg: '#F8F4EF',
   },
@@ -21,7 +21,7 @@ const categories = [
     eyebrow: 'MADE TO MOVE',
     heading: 'For work. For the road.',
     linkLabel: 'Shop van',
-    path: '/categories',
+    path: '/shop?category=van', // تم التعديل لتوجيه لصفحة الشوب وفلترة الـ Van
     img: '/car3.jpg',
     bg: '#F8F4EF',
   },
@@ -60,15 +60,15 @@ export default function EditorialCategoriesSection() {
               </p>
 
               <h3 
-  className="text-[#141619] text-[20px] lg:text-[22px] font-normal leading-snug tracking-wide"
-  style={{
-    fontFamily: "'PostNoBillsColombo', sans-serif",
-    fontWeight: 400,
-    letterSpacing: '0.03em', // مسافة خفيفة بين الحروف لمنع الالتصاق
-  }}
->
-  {cat.heading}
-</h3>
+                className="text-[#141619] text-[20px] lg:text-[22px] font-normal leading-snug tracking-wide"
+                style={{
+                  fontFamily: "'PostNoBillsColombo', sans-serif",
+                  fontWeight: 400,
+                  letterSpacing: '0.03em',
+                }}
+              >
+                {cat.heading}
+              </h3>
 
               <Link
                 to={cat.path}
