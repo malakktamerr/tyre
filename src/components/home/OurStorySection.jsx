@@ -90,12 +90,12 @@ export default function OurStorySection() {
           </p>
 
           <Link
-            to="/hero"
-            className="inline-flex items-center gap-2 text-[#FFC700] text-[14px] font-medium no-underline hover:opacity-90 transition-opacity"
-          >
-            <span className="underline underline-offset-4 decoration-[#FFC700]">Read our story</span>
-            <span className="no-underline">→</span>
-          </Link>
+  to="/our-story"
+  className="group inline-flex items-center gap-2 text-[#FFC700] text-[14px] font-medium no-underline hover:opacity-90 transition-opacity"
+>
+  <span className="underline underline-offset-4 decoration-[#FFC700]">Read our story</span>
+  <span className="no-underline transition-transform group-hover:translate-x-1">→</span>
+</Link>
         </div>
 
         {/* ════════════ BOTTOM FEATURES ROW ════════════ */}
