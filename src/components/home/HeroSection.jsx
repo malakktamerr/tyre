@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
+import { useLang } from '../../context/LanguageContext';
 
 /* ─── Bottom info bar items ─────────────────────────────────────────────── */
-const infoItems = [
-  'FREE DELIVERY OVER EGP 2,000',
-  'FREE DELIVERY OVER EGP 2,000',
-  'DESIGNED FOR EVERY BODY',
-  'EASY 14-DAY RETURNS',
-  'MADE FOR REAL LIFE',
+const marKeys = [
+  'mar_delivery',
+  'mar_delivery',
+  'mar_designed',
+  'mar_returns',
+  'mar_life',
 ];
 
 export default function HeroSection() {
+  const { t, lang } = useLang();
   return (
     <section className="flex flex-col bg-white overflow-hidden isolate">
 
@@ -43,17 +45,17 @@ export default function HeroSection() {
     fontFamily: "'PostNoBillsColombo', sans-serif", 
     fontSize: 'clamp(36px, 10vw, 52px)',
     fontWeight: 400,
-    letterSpacing: '0.03em', // مسافة خفيفة لمنع تداخل الحروف
+    letterSpacing: '0.03em',
   }}
 >
-  Made for<br />every<br />road.
+  {t('hero_title_1')}<br />{t('hero_title_2')}<br />{t('hero_title_3')}
 </h1>
 
     <p 
       className="hero-text-enter hero-text-d3 text-[13px] leading-relaxed text-white/80 mb-5"
       style={{ maxWidth: '320px' }}
     >
-      Find tyres for your car, your roads and your everyday journeys.
+      {t('hero_subtitle')}
     </p>
 
     <div className="hero-text-enter hero-text-d4 flex flex-col gap-2.5">
@@ -62,13 +64,13 @@ export default function HeroSection() {
         className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-7 py-2.5 text-[13px] font-medium text-black no-underline transition-opacity hover:opacity-90 text-center"
         style={{ background: '#FFC700' }}
       >
-        Shop new arrivals
+        {t('hero_btn_new')}
       </Link>
       <Link
         to="/shop"
         className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/70 bg-transparent px-7 py-2.5 text-[13px] font-medium text-white no-underline transition-colors hover:bg-white/10 text-center"
       >
-        Explore the range
+        {t('hero_btn_range')}
       </Link>
     </div>
   </div>
@@ -105,14 +107,14 @@ export default function HeroSection() {
     letterSpacing: '-0.01em'
   }}
 >
-  Made for<br />
-  every<br />
-  road.
+  {t('hero_title_1')}<br />
+  {t('hero_title_2')}<br />
+  {t('hero_title_3')}
 </h1>
 
           <p className="hero-text-enter hero-text-d3 text-[15px] lg:text-[16px] leading-relaxed text-white/85 mb-8"
              style={{ maxWidth: '400px' }}>
-            Find tyres for your car, your roads and your everyday journeys.
+            {t('hero_subtitle')}
           </p>
 
           <div className="hero-text-enter hero-text-d4 flex items-center gap-4">
@@ -121,13 +123,13 @@ export default function HeroSection() {
               className="inline-flex items-center whitespace-nowrap rounded-full px-8 py-3 text-[14px] font-medium text-black no-underline transition-opacity hover:opacity-90 shadow-lg"
               style={{ background: '#FFC700' }}
             >
-              Shop new arrivals
+              {t('hero_btn_new')}
             </Link>
             <Link
               to="/shop"
               className="inline-flex items-center whitespace-nowrap rounded-full border border-white/70 bg-transparent px-8 py-3 text-[14px] font-medium text-white no-underline transition-colors hover:bg-white/10"
             >
-              Explore the range
+              {t('hero_btn_range')}
             </Link>
           </div>
         </div>
@@ -140,10 +142,10 @@ export default function HeroSection() {
         <div className="marquee-track flex w-max">
           {[0, 1].map((copy) => (
             <span key={copy} className="flex items-center" aria-hidden={copy === 1}>
-              {infoItems.map((item, i) => (
+              {marKeys.map((key, i) => (
                 <span key={i} className="flex items-center">
                   <span className="text-[10px] font-medium tracking-[0.10em] text-[#1a1a1a] uppercase whitespace-nowrap px-8">
-                    {item}
+                    {t(key)}
                   </span>
                   <span className="text-[10px] text-[#1a1a1a] opacity-25" aria-hidden="true">|</span>
                 </span>

@@ -41,6 +41,7 @@ export default function AppRoutes() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/offers" element={<OffersPage />} />
         <Route path="/account" element={<PersonalDetailsPage />} />
         <Route path="/account/orders" element={<MyOrdersPage />} />
         <Route path="/account/orders/:id" element={<OrderDetailsPage />} />

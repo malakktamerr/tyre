@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { allProducts } from '../data/products.js';
 import { useCart } from '../context/CartContext';
+import { useLang } from '../context/LanguageContext';
 
 /* ── quick suggestions shown before typing ── */
 const SUGGESTIONS = [
@@ -68,6 +69,7 @@ function ProductCard({ p }) {
 ══════════════════════════════════════════════════════════ */
 export default function SearchPage() {
   const [query, setQuery] = useState('');
+  const { t } = useLang();
 
   const trimmed = query.trim().toLowerCase();
 
@@ -94,35 +96,26 @@ export default function SearchPage() {
         <nav className="flex items-center gap-1.5 text-[11px] text-[#aaa] mb-4">
           <Link to="/" className="text-[#aaa] no-underline hover:text-[#1a1a1a] transition-colors">Home</Link>
           <span className="text-[#d0ccc7]">/</span>
-          <span className="text-[#555]">Search</span>
+          <span className="text-[#555]">{t('search_title').split('.')[0]}</span>
         </nav>
 
         {/* Heading */}
-        <h1
-          className="text-[clamp(28px,4vw,42px)] font-normal text-[#1a1a1a] m-0 mb-2 leading-tight tracking-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
-          Find your next tyres.
+        <h1 className="text-[clamp(28px,4vw,42px)] font-normal text-[#1a1a1a] m-0 mb-2 leading-tight tracking-tight"
+          style={{ fontFamily: 'var(--font-heading)' }}>
+          {t('search_title')}
         </h1>
         <p className="text-[14px] font-medium text-[#555] m-0 mb-6">
-          Search by tyre size, product name or vehicle category.
+          {t('search_subtitle')}
         </p>
 
         {/* Search input */}
         <div className="relative mb-2" style={{ maxWidth: 680 }}>
-          <input
-            type="search"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            placeholder='Try "205/55 R16", "touring" or "SUV"'
-            autoFocus
+          <input type="search" value={query} onChange={e => setQuery(e.target.value)}
+            placeholder={t('search_placeholder')} autoFocus
             className="w-full h-12 pl-4 pr-12 text-[14px] text-[#1a1a1a] border border-[#d4d0cb] rounded-lg bg-white outline-none focus:border-[#1a1a1a] transition-colors placeholder:text-[#bbb]"
-            style={{ fontFamily: 'system-ui,sans-serif' }}
-          />
-          <button
-            aria-label="Search"
-            className="absolute right-0 top-0 h-12 w-12 flex items-center justify-center rounded-r-lg bg-[#E8C200] hover:bg-[#d4a800] transition-colors"
-          >
+            style={{ fontFamily: 'system-ui,sans-serif' }} />
+          <button aria-label="Search"
+            className="absolute right-0 top-0 h-12 w-12 flex items-center justify-center rounded-r-lg bg-[#E8C200] hover:bg-[#d4a800] transition-colors">
             <Search size={16} strokeWidth={2} color="#1a1a1a" />
           </button>
         </div>
@@ -131,16 +124,13 @@ export default function SearchPage() {
         {trimmed.length === 0 && (
           <div className="mb-10" style={{ maxWidth: 680 }}>
             <p className="text-[11px] font-bold text-[#1a1a1a] uppercase tracking-wider mb-2">
-              Search Discovery
+              {t('search_discovery')}
             </p>
             <div className="flex flex-wrap gap-2">
               {SUGGESTIONS.map(s => (
-                <button
-                  key={s}
-                  onClick={() => setQuery(s)}
+                <button key={s} onClick={() => setQuery(s)}
                   className="text-[12px] font-medium text-[#555] bg-[#f5f5f5] hover:bg-[#ebebeb] border-none rounded-full px-3 py-1.5 cursor-pointer transition-colors"
-                  style={{ fontFamily: 'system-ui,sans-serif' }}
-                >
+                  style={{ fontFamily: 'system-ui,sans-serif' }}>
                   {s}
                 </button>
               ))}
@@ -154,7 +144,7 @@ export default function SearchPage() {
             {results.length > 0 ? (
               <>
                 <p className="text-[12px] font-medium text-[#888] mb-5">
-                  {results.length} result{results.length !== 1 ? 's' : ''} for &ldquo;{query.trim()}&rdquo;
+                  {results.length} {t('search_results')} &ldquo;{query.trim()}&rdquo;
                 </p>
                 <div className="grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))' }}>
                   {results.map(p => <ProductCard key={p.id} p={p} />)}
@@ -163,39 +153,30 @@ export default function SearchPage() {
             ) : (
               <div className="py-12 text-center">
                 <p className="text-[16px] font-semibold text-[#1a1a1a] mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
-                  No results for &ldquo;{query.trim()}&rdquo;
+                  {t('search_no_results')} &ldquo;{query.trim()}&rdquo;
                 </p>
-                <p className="text-[13px] text-[#888]">
-                  Try a different tyre size, category, or product name.
-                </p>
+                <p className="text-[13px] text-[#888]">{t('search_no_results_sub')}</p>
               </div>
             )}
           </div>
         )}
 
-        {/* Featured products section — always shown */}
+        {/* Featured products section */}
         {trimmed.length === 0 && (
           <section>
             <div className="flex items-center justify-between mb-5">
               <div>
-                <h2
-                  className="text-[clamp(20px,2.5vw,28px)] font-normal text-[#1a1a1a] m-0 mb-1"
-                  style={{ fontFamily: 'var(--font-heading)' }}
-                >
-                  A good place to start.
+                <h2 className="text-[clamp(20px,2.5vw,28px)] font-normal text-[#1a1a1a] m-0 mb-1"
+                  style={{ fontFamily: 'var(--font-heading)' }}>
+                  {t('search_good_start')}
                 </h2>
-                <p className="text-[13px] text-[#888] m-0">
-                  Browse everyday tyres while you find the right size for your vehicle.
-                </p>
+                <p className="text-[13px] text-[#888] m-0">{t('search_good_sub')}</p>
               </div>
-              <Link
-                to="/shop"
-                className="text-[12px] font-medium text-[#C8502A] no-underline hover:underline hover:underline-offset-2 whitespace-nowrap ml-4 shrink-0"
-              >
-                Show all →
+              <Link to="/shop"
+                className="text-[12px] font-medium text-[#C8502A] no-underline hover:underline hover:underline-offset-2 whitespace-nowrap ml-4 shrink-0">
+                {t('search_show_all')}
               </Link>
             </div>
-
             <div className="grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))' }}>
               {featured.map(p => <ProductCard key={p.id} p={p} />)}
             </div>

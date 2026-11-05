@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useLang } from '../context/LanguageContext';
 
 const YELLOW = '#E8C200';
 const ORANGE = '#C9573A';
@@ -21,9 +22,8 @@ const PAYMENT_METHODS = [
 ];
 
 /* ─── Stepper ───────────────────────────────────────────────────────────── */
-const STEPS = ['Contact & delivery', 'Payment & review', 'Confirmation'];
-
-function Stepper({ current }) {
+function Stepper({ current, t }) {
+  const STEPS = [t('co_contact_delivery'), t('co_payment_review'), t('co_confirmation')];
   return (
     <nav aria-label="Checkout steps" className="co-stepper">
       {STEPS.map((label, i) => {
@@ -210,6 +210,7 @@ function SelectField({ label, id, value, onChange, options, half }) {
 export default function CheckoutPage() {
   const navigate = useNavigate();
   const { items, merchandiseTotal } = useCart();
+  const { t } = useLang();
 
   const [step, setStep] = useState(0);
   const [payMethod, setPayMethod] = useState('instapay');
